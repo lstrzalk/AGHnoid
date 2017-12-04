@@ -1,0 +1,38 @@
+module keyboard(kb_clk, data, direction /*, reset*/);
+	input kb_clk, data;
+	output int direction = 0;
+	// output reg reset = 0; 
+	reg [7:0] code;
+	reg [10:0]keyCode, previousCode;
+	reg recordNext = 0;
+	integer count = 0;
+
+always@(negedge kb_clk)
+	// keybord sygnals handling
+	begin
+		keyCode[count] = data;
+		count = count + 1;			
+		if(count == 11)
+		begin
+			if(previousCode == 8'hF0)	// break code
+			begin
+				code <= keyCode[8:1];	// make code
+			end
+			previousCode = keyCode[8:1];
+			count = 0;
+		end
+	end
+	
+	// selecting direction
+	always@(code)
+	begin
+		if(code == 8'h23)		// D
+			direction = 1;
+		else if(code == 8'h1C)	// A
+			direction = 2;
+		/* TODO
+		else if(code == 8'h5A)	// ENTER
+			reset <= ~reset;
+		*/
+	end	
+endmodule // keyboard

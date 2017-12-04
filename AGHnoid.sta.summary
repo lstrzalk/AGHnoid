@@ -1,0 +1,149 @@
+------------------------------------------------------------
+TimeQuest Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow Model Setup 'update_clk:updater|update'
+Slack : -248.921
+TNS   : -37206.632
+
+Type  : Slow Model Setup 'points[10]'
+Slack : -84.404
+TNS   : -1423.187
+
+Type  : Slow Model Setup 'clk_divider_by2:divider|VGA_clk~_Duplicate_1'
+Slack : -18.449
+TNS   : -1744.940
+
+Type  : Slow Model Setup 'master_clk'
+Slack : -2.503
+TNS   : -39.573
+
+Type  : Slow Model Setup 'keyboard:keyboard_handler|keyboard_clk_filtered'
+Slack : -1.634
+TNS   : -29.021
+
+Type  : Slow Model Setup 'lifes[10]'
+Slack : -0.069
+TNS   : -0.069
+
+Type  : Slow Model Hold 'points[10]'
+Slack : -98.807
+TNS   : -1706.067
+
+Type  : Slow Model Hold 'clk_divider_by2:divider|VGA_clk~_Duplicate_1'
+Slack : -3.578
+TNS   : -3.578
+
+Type  : Slow Model Hold 'lifes[10]'
+Slack : -3.146
+TNS   : -15.436
+
+Type  : Slow Model Hold 'master_clk'
+Slack : -2.666
+TNS   : -2.666
+
+Type  : Slow Model Hold 'update_clk:updater|update'
+Slack : 0.000
+TNS   : 0.000
+
+Type  : Slow Model Hold 'keyboard:keyboard_handler|keyboard_clk_filtered'
+Slack : 0.391
+TNS   : 0.000
+
+Type  : Slow Model Minimum Pulse Width 'points[10]'
+Slack : -85.134
+TNS   : -929341.510
+
+Type  : Slow Model Minimum Pulse Width 'master_clk'
+Slack : -1.380
+TNS   : -27.380
+
+Type  : Slow Model Minimum Pulse Width 'update_clk:updater|update'
+Slack : -0.500
+TNS   : -341.000
+
+Type  : Slow Model Minimum Pulse Width 'clk_divider_by2:divider|VGA_clk~_Duplicate_1'
+Slack : -0.500
+TNS   : -185.000
+
+Type  : Slow Model Minimum Pulse Width 'keyboard:keyboard_handler|keyboard_clk_filtered'
+Slack : -0.500
+TNS   : -22.000
+
+Type  : Slow Model Minimum Pulse Width 'lifes[10]'
+Slack : 0.500
+TNS   : 0.000
+
+Type  : Fast Model Setup 'update_clk:updater|update'
+Slack : -109.845
+TNS   : -16309.420
+
+Type  : Fast Model Setup 'points[10]'
+Slack : -36.695
+TNS   : -614.920
+
+Type  : Fast Model Setup 'clk_divider_by2:divider|VGA_clk~_Duplicate_1'
+Slack : -7.745
+TNS   : -727.164
+
+Type  : Fast Model Setup 'master_clk'
+Slack : -0.600
+TNS   : -7.122
+
+Type  : Fast Model Setup 'keyboard:keyboard_handler|keyboard_clk_filtered'
+Slack : -0.263
+TNS   : -3.792
+
+Type  : Fast Model Setup 'lifes[10]'
+Slack : 0.656
+TNS   : 0.000
+
+Type  : Fast Model Hold 'points[10]'
+Slack : -43.821
+TNS   : -758.953
+
+Type  : Fast Model Hold 'clk_divider_by2:divider|VGA_clk~_Duplicate_1'
+Slack : -2.095
+TNS   : -2.095
+
+Type  : Fast Model Hold 'lifes[10]'
+Slack : -1.788
+TNS   : -8.815
+
+Type  : Fast Model Hold 'master_clk'
+Slack : -1.657
+TNS   : -1.657
+
+Type  : Fast Model Hold 'update_clk:updater|update'
+Slack : -0.508
+TNS   : -1.237
+
+Type  : Fast Model Hold 'keyboard:keyboard_handler|keyboard_clk_filtered'
+Slack : 0.215
+TNS   : 0.000
+
+Type  : Fast Model Minimum Pulse Width 'points[10]'
+Slack : -37.364
+TNS   : -404075.452
+
+Type  : Fast Model Minimum Pulse Width 'master_clk'
+Slack : -1.380
+TNS   : -27.380
+
+Type  : Fast Model Minimum Pulse Width 'update_clk:updater|update'
+Slack : -0.500
+TNS   : -341.000
+
+Type  : Fast Model Minimum Pulse Width 'clk_divider_by2:divider|VGA_clk~_Duplicate_1'
+Slack : -0.500
+TNS   : -185.000
+
+Type  : Fast Model Minimum Pulse Width 'keyboard:keyboard_handler|keyboard_clk_filtered'
+Slack : -0.500
+TNS   : -22.000
+
+Type  : Fast Model Minimum Pulse Width 'lifes[10]'
+Slack : 0.500
+TNS   : 0.000
+
+------------------------------------------------------------

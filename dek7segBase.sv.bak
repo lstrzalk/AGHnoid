@@ -1,0 +1,8 @@
+module dek7segBase(input [3:0] data_in,	output logic [6:0] seg);
+	always@(data_in)
+	case(data_in)
+		4'b0101: seg[6:0] <= 7'b1110111;	//to display A
+		4'b1011: seg[6:0] <= 7'b0111101;	//to display d
+		default: seg[6:0] <= 7'b0000001;	// to display -
+	endcase
+endmodule

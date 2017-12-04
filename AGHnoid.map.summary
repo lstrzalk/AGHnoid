@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Wed Jan 25 14:32:13 2017
+Quartus II 64-Bit Version : 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition
+Revision Name : AGHnoid
+Top-level Entity Name : aghnoid
+Family : Cyclone II
+Total logic elements : 43,651
+    Total combinational functions : 43,598
+    Dedicated logic registers : 573
+Total registers : 573
+Total pins : 86
+Total virtual pins : 0
+Total memory bits : 0
+Embedded Multiplier 9-bit elements : 300
+Total PLLs : 0

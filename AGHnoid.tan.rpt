@@ -1,0 +1,822 @@
+Classic Timing Analyzer report for AGHnoid
+Wed Nov 23 17:50:32 2016
+Quartus II Version 9.0 Build 235 06/17/2009 Service Pack 2 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Timing Analyzer Summary
+  3. Timing Analyzer Settings
+  4. Clock Settings Summary
+  5. Parallel Compilation
+  6. Clock Setup: 'master_clk'
+  7. Clock Setup: 'kb_clk'
+  8. Clock Hold: 'master_clk'
+  9. tsu
+ 10. tco
+ 11. th
+ 12. Timing Analyzer Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2009 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Timing Analyzer Summary                                                                                                                                                                                                           ;
++------------------------------+------------------------------------------+---------------+----------------------------------+---------------------------+---------------------------------+------------+------------+--------------+
+; Type                         ; Slack                                    ; Required Time ; Actual Time                      ; From                      ; To                              ; From Clock ; To Clock   ; Failed Paths ;
++------------------------------+------------------------------------------+---------------+----------------------------------+---------------------------+---------------------------------+------------+------------+--------------+
+; Worst-case tsu               ; N/A                                      ; None          ; 4.877 ns                         ; data                      ; keyboard:key|previousCode[7]    ; --         ; kb_clk     ; 0            ;
+; Worst-case tco               ; N/A                                      ; None          ; 13.659 ns                        ; VGA_R[4]~reg0             ; VGA_R[4]                        ; master_clk ; --         ; 0            ;
+; Worst-case th                ; N/A                                      ; None          ; -2.773 ns                        ; data                      ; keyboard:key|keyCode[2]         ; --         ; kb_clk     ; 0            ;
+; Clock Setup: 'master_clk'    ; N/A                                      ; None          ; 138.87 MHz ( period = 7.201 ns ) ; rocket_x_pos[5]           ; rocket_x_pos[0]                 ; master_clk ; master_clk ; 0            ;
+; Clock Setup: 'kb_clk'        ; N/A                                      ; None          ; 149.88 MHz ( period = 6.672 ns ) ; keyboard:key|count[0]     ; keyboard:key|previousCode[5]    ; kb_clk     ; kb_clk     ; 0            ;
+; Clock Hold: 'master_clk'     ; Not operational: Clock Skew > Data Delay ; None          ; N/A                              ; clk_divider_by2:divider|q ; clk_divider_by2:divider|VGA_clk ; master_clk ; master_clk ; 2            ;
+; Total number of failed paths ;                                          ;               ;                                  ;                           ;                                 ;            ;            ; 2            ;
++------------------------------+------------------------------------------+---------------+----------------------------------+---------------------------+---------------------------------+------------+------------+--------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Timing Analyzer Settings                                                                                           ;
++---------------------------------------------------------------------+--------------------+------+----+-------------+
+; Option                                                              ; Setting            ; From ; To ; Entity Name ;
++---------------------------------------------------------------------+--------------------+------+----+-------------+
+; Device Name                                                         ; EP2C70F896C6       ;      ;    ;             ;
+; Timing Models                                                       ; Final              ;      ;    ;             ;
+; Default hold multicycle                                             ; Same as Multicycle ;      ;    ;             ;
+; Cut paths between unrelated clock domains                           ; On                 ;      ;    ;             ;
+; Cut off read during write signal paths                              ; On                 ;      ;    ;             ;
+; Cut off feedback from I/O pins                                      ; On                 ;      ;    ;             ;
+; Report Combined Fast/Slow Timing                                    ; Off                ;      ;    ;             ;
+; Ignore Clock Settings                                               ; Off                ;      ;    ;             ;
+; Analyze latches as synchronous elements                             ; On                 ;      ;    ;             ;
+; Enable Recovery/Removal analysis                                    ; Off                ;      ;    ;             ;
+; Enable Clock Latency                                                ; Off                ;      ;    ;             ;
+; Use TimeQuest Timing Analyzer                                       ; Off                ;      ;    ;             ;
+; Minimum Core Junction Temperature                                   ; 0                  ;      ;    ;             ;
+; Maximum Core Junction Temperature                                   ; 85                 ;      ;    ;             ;
+; Number of source nodes to report per destination node               ; 10                 ;      ;    ;             ;
+; Number of destination nodes to report                               ; 10                 ;      ;    ;             ;
+; Number of paths to report                                           ; 200                ;      ;    ;             ;
+; Report Minimum Timing Checks                                        ; Off                ;      ;    ;             ;
+; Use Fast Timing Models                                              ; Off                ;      ;    ;             ;
+; Report IO Paths Separately                                          ; Off                ;      ;    ;             ;
+; Perform Multicorner Analysis                                        ; On                 ;      ;    ;             ;
+; Reports the worst-case path for each clock domain and analysis      ; Off                ;      ;    ;             ;
+; Removes common clock path pessimism (CCPP) during slack computation ; Off                ;      ;    ;             ;
+; Output I/O Timing Endpoint                                          ; Near End           ;      ;    ;             ;
++---------------------------------------------------------------------+--------------------+------+----+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Settings Summary                                                                                                                                                             ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+; Clock Node Name ; Clock Setting Name ; Type     ; Fmax Requirement ; Early Latency ; Late Latency ; Based on ; Multiply Base Fmax by ; Divide Base Fmax by ; Offset ; Phase offset ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+; master_clk      ;                    ; User Pin ; None             ; 0.000 ns      ; 0.000 ns     ; --       ; N/A                   ; N/A                 ; N/A    ;              ;
+; kb_clk          ;                    ; User Pin ; None             ; 0.000 ns      ; 0.000 ns     ; --       ; N/A                   ; N/A                 ; N/A    ;              ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+
+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 4      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Setup: 'master_clk'                                                                                                                                                                                                                         ;
++-----------------------------------------+-----------------------------------------------------+------------------+------------------+------------+------------+-----------------------------+---------------------------+-------------------------+
+; Slack                                   ; Actual fmax (period)                                ; From             ; To               ; From Clock ; To Clock   ; Required Setup Relationship ; Required Longest P2P Time ; Actual Longest P2P Time ;
++-----------------------------------------+-----------------------------------------------------+------------------+------------------+------------+------------+-----------------------------+---------------------------+-------------------------+
+; N/A                                     ; 138.87 MHz ( period = 7.201 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[0]  ; master_clk ; master_clk ; None                        ; None                      ; 6.994 ns                ;
+; N/A                                     ; 139.04 MHz ( period = 7.192 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[31] ; master_clk ; master_clk ; None                        ; None                      ; 6.987 ns                ;
+; N/A                                     ; 139.04 MHz ( period = 7.192 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[30] ; master_clk ; master_clk ; None                        ; None                      ; 6.987 ns                ;
+; N/A                                     ; 139.04 MHz ( period = 7.192 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[27] ; master_clk ; master_clk ; None                        ; None                      ; 6.987 ns                ;
+; N/A                                     ; 139.04 MHz ( period = 7.192 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[28] ; master_clk ; master_clk ; None                        ; None                      ; 6.987 ns                ;
+; N/A                                     ; 139.04 MHz ( period = 7.192 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[26] ; master_clk ; master_clk ; None                        ; None                      ; 6.987 ns                ;
+; N/A                                     ; 139.04 MHz ( period = 7.192 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[29] ; master_clk ; master_clk ; None                        ; None                      ; 6.987 ns                ;
+; N/A                                     ; 139.04 MHz ( period = 7.192 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[18] ; master_clk ; master_clk ; None                        ; None                      ; 6.987 ns                ;
+; N/A                                     ; 139.04 MHz ( period = 7.192 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[19] ; master_clk ; master_clk ; None                        ; None                      ; 6.987 ns                ;
+; N/A                                     ; 139.04 MHz ( period = 7.192 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[20] ; master_clk ; master_clk ; None                        ; None                      ; 6.987 ns                ;
+; N/A                                     ; 139.04 MHz ( period = 7.192 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[21] ; master_clk ; master_clk ; None                        ; None                      ; 6.987 ns                ;
+; N/A                                     ; 139.04 MHz ( period = 7.192 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[25] ; master_clk ; master_clk ; None                        ; None                      ; 6.987 ns                ;
+; N/A                                     ; 139.04 MHz ( period = 7.192 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[24] ; master_clk ; master_clk ; None                        ; None                      ; 6.987 ns                ;
+; N/A                                     ; 139.04 MHz ( period = 7.192 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[23] ; master_clk ; master_clk ; None                        ; None                      ; 6.987 ns                ;
+; N/A                                     ; 139.04 MHz ( period = 7.192 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[22] ; master_clk ; master_clk ; None                        ; None                      ; 6.987 ns                ;
+; N/A                                     ; 139.04 MHz ( period = 7.192 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[16] ; master_clk ; master_clk ; None                        ; None                      ; 6.987 ns                ;
+; N/A                                     ; 139.04 MHz ( period = 7.192 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[17] ; master_clk ; master_clk ; None                        ; None                      ; 6.987 ns                ;
+; N/A                                     ; 139.39 MHz ( period = 7.174 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[3]  ; master_clk ; master_clk ; None                        ; None                      ; 6.958 ns                ;
+; N/A                                     ; 139.65 MHz ( period = 7.161 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[0]  ; master_clk ; master_clk ; None                        ; None                      ; 6.955 ns                ;
+; N/A                                     ; 139.82 MHz ( period = 7.152 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[31] ; master_clk ; master_clk ; None                        ; None                      ; 6.948 ns                ;
+; N/A                                     ; 139.82 MHz ( period = 7.152 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[30] ; master_clk ; master_clk ; None                        ; None                      ; 6.948 ns                ;
+; N/A                                     ; 139.82 MHz ( period = 7.152 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[27] ; master_clk ; master_clk ; None                        ; None                      ; 6.948 ns                ;
+; N/A                                     ; 139.82 MHz ( period = 7.152 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[28] ; master_clk ; master_clk ; None                        ; None                      ; 6.948 ns                ;
+; N/A                                     ; 139.82 MHz ( period = 7.152 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[26] ; master_clk ; master_clk ; None                        ; None                      ; 6.948 ns                ;
+; N/A                                     ; 139.82 MHz ( period = 7.152 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[29] ; master_clk ; master_clk ; None                        ; None                      ; 6.948 ns                ;
+; N/A                                     ; 139.82 MHz ( period = 7.152 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[18] ; master_clk ; master_clk ; None                        ; None                      ; 6.948 ns                ;
+; N/A                                     ; 139.82 MHz ( period = 7.152 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[19] ; master_clk ; master_clk ; None                        ; None                      ; 6.948 ns                ;
+; N/A                                     ; 139.82 MHz ( period = 7.152 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[20] ; master_clk ; master_clk ; None                        ; None                      ; 6.948 ns                ;
+; N/A                                     ; 139.82 MHz ( period = 7.152 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[21] ; master_clk ; master_clk ; None                        ; None                      ; 6.948 ns                ;
+; N/A                                     ; 139.82 MHz ( period = 7.152 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[25] ; master_clk ; master_clk ; None                        ; None                      ; 6.948 ns                ;
+; N/A                                     ; 139.82 MHz ( period = 7.152 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[24] ; master_clk ; master_clk ; None                        ; None                      ; 6.948 ns                ;
+; N/A                                     ; 139.82 MHz ( period = 7.152 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[23] ; master_clk ; master_clk ; None                        ; None                      ; 6.948 ns                ;
+; N/A                                     ; 139.82 MHz ( period = 7.152 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[22] ; master_clk ; master_clk ; None                        ; None                      ; 6.948 ns                ;
+; N/A                                     ; 139.82 MHz ( period = 7.152 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[16] ; master_clk ; master_clk ; None                        ; None                      ; 6.948 ns                ;
+; N/A                                     ; 139.82 MHz ( period = 7.152 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[17] ; master_clk ; master_clk ; None                        ; None                      ; 6.948 ns                ;
+; N/A                                     ; 140.17 MHz ( period = 7.134 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[3]  ; master_clk ; master_clk ; None                        ; None                      ; 6.919 ns                ;
+; N/A                                     ; 140.39 MHz ( period = 7.123 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[0]  ; master_clk ; master_clk ; None                        ; None                      ; 6.916 ns                ;
+; N/A                                     ; 140.57 MHz ( period = 7.114 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[31] ; master_clk ; master_clk ; None                        ; None                      ; 6.909 ns                ;
+; N/A                                     ; 140.57 MHz ( period = 7.114 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[30] ; master_clk ; master_clk ; None                        ; None                      ; 6.909 ns                ;
+; N/A                                     ; 140.57 MHz ( period = 7.114 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[27] ; master_clk ; master_clk ; None                        ; None                      ; 6.909 ns                ;
+; N/A                                     ; 140.57 MHz ( period = 7.114 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[28] ; master_clk ; master_clk ; None                        ; None                      ; 6.909 ns                ;
+; N/A                                     ; 140.57 MHz ( period = 7.114 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[26] ; master_clk ; master_clk ; None                        ; None                      ; 6.909 ns                ;
+; N/A                                     ; 140.57 MHz ( period = 7.114 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[29] ; master_clk ; master_clk ; None                        ; None                      ; 6.909 ns                ;
+; N/A                                     ; 140.57 MHz ( period = 7.114 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[18] ; master_clk ; master_clk ; None                        ; None                      ; 6.909 ns                ;
+; N/A                                     ; 140.57 MHz ( period = 7.114 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[19] ; master_clk ; master_clk ; None                        ; None                      ; 6.909 ns                ;
+; N/A                                     ; 140.57 MHz ( period = 7.114 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[20] ; master_clk ; master_clk ; None                        ; None                      ; 6.909 ns                ;
+; N/A                                     ; 140.57 MHz ( period = 7.114 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[21] ; master_clk ; master_clk ; None                        ; None                      ; 6.909 ns                ;
+; N/A                                     ; 140.57 MHz ( period = 7.114 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[25] ; master_clk ; master_clk ; None                        ; None                      ; 6.909 ns                ;
+; N/A                                     ; 140.57 MHz ( period = 7.114 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[24] ; master_clk ; master_clk ; None                        ; None                      ; 6.909 ns                ;
+; N/A                                     ; 140.57 MHz ( period = 7.114 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[23] ; master_clk ; master_clk ; None                        ; None                      ; 6.909 ns                ;
+; N/A                                     ; 140.57 MHz ( period = 7.114 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[22] ; master_clk ; master_clk ; None                        ; None                      ; 6.909 ns                ;
+; N/A                                     ; 140.57 MHz ( period = 7.114 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[16] ; master_clk ; master_clk ; None                        ; None                      ; 6.909 ns                ;
+; N/A                                     ; 140.57 MHz ( period = 7.114 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[17] ; master_clk ; master_clk ; None                        ; None                      ; 6.909 ns                ;
+; N/A                                     ; 140.92 MHz ( period = 7.096 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[3]  ; master_clk ; master_clk ; None                        ; None                      ; 6.880 ns                ;
+; N/A                                     ; 141.94 MHz ( period = 7.045 ns )                    ; rocket_x_pos[4]  ; rocket_x_pos[0]  ; master_clk ; master_clk ; None                        ; None                      ; 6.836 ns                ;
+; N/A                                     ; 142.13 MHz ( period = 7.036 ns )                    ; rocket_x_pos[4]  ; rocket_x_pos[31] ; master_clk ; master_clk ; None                        ; None                      ; 6.829 ns                ;
+; N/A                                     ; 142.13 MHz ( period = 7.036 ns )                    ; rocket_x_pos[4]  ; rocket_x_pos[30] ; master_clk ; master_clk ; None                        ; None                      ; 6.829 ns                ;
+; N/A                                     ; 142.13 MHz ( period = 7.036 ns )                    ; rocket_x_pos[4]  ; rocket_x_pos[27] ; master_clk ; master_clk ; None                        ; None                      ; 6.829 ns                ;
+; N/A                                     ; 142.13 MHz ( period = 7.036 ns )                    ; rocket_x_pos[4]  ; rocket_x_pos[28] ; master_clk ; master_clk ; None                        ; None                      ; 6.829 ns                ;
+; N/A                                     ; 142.13 MHz ( period = 7.036 ns )                    ; rocket_x_pos[4]  ; rocket_x_pos[26] ; master_clk ; master_clk ; None                        ; None                      ; 6.829 ns                ;
+; N/A                                     ; 142.13 MHz ( period = 7.036 ns )                    ; rocket_x_pos[4]  ; rocket_x_pos[29] ; master_clk ; master_clk ; None                        ; None                      ; 6.829 ns                ;
+; N/A                                     ; 142.13 MHz ( period = 7.036 ns )                    ; rocket_x_pos[4]  ; rocket_x_pos[18] ; master_clk ; master_clk ; None                        ; None                      ; 6.829 ns                ;
+; N/A                                     ; 142.13 MHz ( period = 7.036 ns )                    ; rocket_x_pos[4]  ; rocket_x_pos[19] ; master_clk ; master_clk ; None                        ; None                      ; 6.829 ns                ;
+; N/A                                     ; 142.13 MHz ( period = 7.036 ns )                    ; rocket_x_pos[4]  ; rocket_x_pos[20] ; master_clk ; master_clk ; None                        ; None                      ; 6.829 ns                ;
+; N/A                                     ; 142.13 MHz ( period = 7.036 ns )                    ; rocket_x_pos[4]  ; rocket_x_pos[21] ; master_clk ; master_clk ; None                        ; None                      ; 6.829 ns                ;
+; N/A                                     ; 142.13 MHz ( period = 7.036 ns )                    ; rocket_x_pos[4]  ; rocket_x_pos[25] ; master_clk ; master_clk ; None                        ; None                      ; 6.829 ns                ;
+; N/A                                     ; 142.13 MHz ( period = 7.036 ns )                    ; rocket_x_pos[4]  ; rocket_x_pos[24] ; master_clk ; master_clk ; None                        ; None                      ; 6.829 ns                ;
+; N/A                                     ; 142.13 MHz ( period = 7.036 ns )                    ; rocket_x_pos[4]  ; rocket_x_pos[23] ; master_clk ; master_clk ; None                        ; None                      ; 6.829 ns                ;
+; N/A                                     ; 142.13 MHz ( period = 7.036 ns )                    ; rocket_x_pos[4]  ; rocket_x_pos[22] ; master_clk ; master_clk ; None                        ; None                      ; 6.829 ns                ;
+; N/A                                     ; 142.13 MHz ( period = 7.036 ns )                    ; rocket_x_pos[4]  ; rocket_x_pos[16] ; master_clk ; master_clk ; None                        ; None                      ; 6.829 ns                ;
+; N/A                                     ; 142.13 MHz ( period = 7.036 ns )                    ; rocket_x_pos[4]  ; rocket_x_pos[17] ; master_clk ; master_clk ; None                        ; None                      ; 6.829 ns                ;
+; N/A                                     ; 142.45 MHz ( period = 7.020 ns )                    ; rocket_x_pos[7]  ; rocket_x_pos[0]  ; master_clk ; master_clk ; None                        ; None                      ; 6.813 ns                ;
+; N/A                                     ; 142.49 MHz ( period = 7.018 ns )                    ; rocket_x_pos[4]  ; rocket_x_pos[3]  ; master_clk ; master_clk ; None                        ; None                      ; 6.800 ns                ;
+; N/A                                     ; 142.63 MHz ( period = 7.011 ns )                    ; rocket_x_pos[7]  ; rocket_x_pos[31] ; master_clk ; master_clk ; None                        ; None                      ; 6.806 ns                ;
+; N/A                                     ; 142.63 MHz ( period = 7.011 ns )                    ; rocket_x_pos[7]  ; rocket_x_pos[30] ; master_clk ; master_clk ; None                        ; None                      ; 6.806 ns                ;
+; N/A                                     ; 142.63 MHz ( period = 7.011 ns )                    ; rocket_x_pos[7]  ; rocket_x_pos[27] ; master_clk ; master_clk ; None                        ; None                      ; 6.806 ns                ;
+; N/A                                     ; 142.63 MHz ( period = 7.011 ns )                    ; rocket_x_pos[7]  ; rocket_x_pos[28] ; master_clk ; master_clk ; None                        ; None                      ; 6.806 ns                ;
+; N/A                                     ; 142.63 MHz ( period = 7.011 ns )                    ; rocket_x_pos[7]  ; rocket_x_pos[26] ; master_clk ; master_clk ; None                        ; None                      ; 6.806 ns                ;
+; N/A                                     ; 142.63 MHz ( period = 7.011 ns )                    ; rocket_x_pos[7]  ; rocket_x_pos[29] ; master_clk ; master_clk ; None                        ; None                      ; 6.806 ns                ;
+; N/A                                     ; 142.63 MHz ( period = 7.011 ns )                    ; rocket_x_pos[7]  ; rocket_x_pos[18] ; master_clk ; master_clk ; None                        ; None                      ; 6.806 ns                ;
+; N/A                                     ; 142.63 MHz ( period = 7.011 ns )                    ; rocket_x_pos[7]  ; rocket_x_pos[19] ; master_clk ; master_clk ; None                        ; None                      ; 6.806 ns                ;
+; N/A                                     ; 142.63 MHz ( period = 7.011 ns )                    ; rocket_x_pos[7]  ; rocket_x_pos[20] ; master_clk ; master_clk ; None                        ; None                      ; 6.806 ns                ;
+; N/A                                     ; 142.63 MHz ( period = 7.011 ns )                    ; rocket_x_pos[7]  ; rocket_x_pos[21] ; master_clk ; master_clk ; None                        ; None                      ; 6.806 ns                ;
+; N/A                                     ; 142.63 MHz ( period = 7.011 ns )                    ; rocket_x_pos[7]  ; rocket_x_pos[25] ; master_clk ; master_clk ; None                        ; None                      ; 6.806 ns                ;
+; N/A                                     ; 142.63 MHz ( period = 7.011 ns )                    ; rocket_x_pos[7]  ; rocket_x_pos[24] ; master_clk ; master_clk ; None                        ; None                      ; 6.806 ns                ;
+; N/A                                     ; 142.63 MHz ( period = 7.011 ns )                    ; rocket_x_pos[7]  ; rocket_x_pos[23] ; master_clk ; master_clk ; None                        ; None                      ; 6.806 ns                ;
+; N/A                                     ; 142.63 MHz ( period = 7.011 ns )                    ; rocket_x_pos[7]  ; rocket_x_pos[22] ; master_clk ; master_clk ; None                        ; None                      ; 6.806 ns                ;
+; N/A                                     ; 142.63 MHz ( period = 7.011 ns )                    ; rocket_x_pos[7]  ; rocket_x_pos[16] ; master_clk ; master_clk ; None                        ; None                      ; 6.806 ns                ;
+; N/A                                     ; 142.63 MHz ( period = 7.011 ns )                    ; rocket_x_pos[7]  ; rocket_x_pos[17] ; master_clk ; master_clk ; None                        ; None                      ; 6.806 ns                ;
+; N/A                                     ; 143.00 MHz ( period = 6.993 ns )                    ; rocket_x_pos[7]  ; rocket_x_pos[3]  ; master_clk ; master_clk ; None                        ; None                      ; 6.777 ns                ;
+; N/A                                     ; 144.05 MHz ( period = 6.942 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[8]  ; master_clk ; master_clk ; None                        ; None                      ; 6.727 ns                ;
+; N/A                                     ; 144.59 MHz ( period = 6.916 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[4]  ; master_clk ; master_clk ; None                        ; None                      ; 6.704 ns                ;
+; N/A                                     ; 144.89 MHz ( period = 6.902 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[8]  ; master_clk ; master_clk ; None                        ; None                      ; 6.688 ns                ;
+; N/A                                     ; 145.14 MHz ( period = 6.890 ns )                    ; rocket_x_pos[9]  ; rocket_x_pos[0]  ; master_clk ; master_clk ; None                        ; None                      ; 6.683 ns                ;
+; N/A                                     ; 145.33 MHz ( period = 6.881 ns )                    ; rocket_x_pos[9]  ; rocket_x_pos[31] ; master_clk ; master_clk ; None                        ; None                      ; 6.676 ns                ;
+; N/A                                     ; 145.33 MHz ( period = 6.881 ns )                    ; rocket_x_pos[9]  ; rocket_x_pos[30] ; master_clk ; master_clk ; None                        ; None                      ; 6.676 ns                ;
+; N/A                                     ; 145.33 MHz ( period = 6.881 ns )                    ; rocket_x_pos[9]  ; rocket_x_pos[27] ; master_clk ; master_clk ; None                        ; None                      ; 6.676 ns                ;
+; N/A                                     ; 145.33 MHz ( period = 6.881 ns )                    ; rocket_x_pos[9]  ; rocket_x_pos[28] ; master_clk ; master_clk ; None                        ; None                      ; 6.676 ns                ;
+; N/A                                     ; 145.33 MHz ( period = 6.881 ns )                    ; rocket_x_pos[9]  ; rocket_x_pos[26] ; master_clk ; master_clk ; None                        ; None                      ; 6.676 ns                ;
+; N/A                                     ; 145.33 MHz ( period = 6.881 ns )                    ; rocket_x_pos[9]  ; rocket_x_pos[29] ; master_clk ; master_clk ; None                        ; None                      ; 6.676 ns                ;
+; N/A                                     ; 145.33 MHz ( period = 6.881 ns )                    ; rocket_x_pos[9]  ; rocket_x_pos[18] ; master_clk ; master_clk ; None                        ; None                      ; 6.676 ns                ;
+; N/A                                     ; 145.33 MHz ( period = 6.881 ns )                    ; rocket_x_pos[9]  ; rocket_x_pos[19] ; master_clk ; master_clk ; None                        ; None                      ; 6.676 ns                ;
+; N/A                                     ; 145.33 MHz ( period = 6.881 ns )                    ; rocket_x_pos[9]  ; rocket_x_pos[20] ; master_clk ; master_clk ; None                        ; None                      ; 6.676 ns                ;
+; N/A                                     ; 145.33 MHz ( period = 6.881 ns )                    ; rocket_x_pos[9]  ; rocket_x_pos[21] ; master_clk ; master_clk ; None                        ; None                      ; 6.676 ns                ;
+; N/A                                     ; 145.33 MHz ( period = 6.881 ns )                    ; rocket_x_pos[9]  ; rocket_x_pos[25] ; master_clk ; master_clk ; None                        ; None                      ; 6.676 ns                ;
+; N/A                                     ; 145.33 MHz ( period = 6.881 ns )                    ; rocket_x_pos[9]  ; rocket_x_pos[24] ; master_clk ; master_clk ; None                        ; None                      ; 6.676 ns                ;
+; N/A                                     ; 145.33 MHz ( period = 6.881 ns )                    ; rocket_x_pos[9]  ; rocket_x_pos[23] ; master_clk ; master_clk ; None                        ; None                      ; 6.676 ns                ;
+; N/A                                     ; 145.33 MHz ( period = 6.881 ns )                    ; rocket_x_pos[9]  ; rocket_x_pos[22] ; master_clk ; master_clk ; None                        ; None                      ; 6.676 ns                ;
+; N/A                                     ; 145.33 MHz ( period = 6.881 ns )                    ; rocket_x_pos[9]  ; rocket_x_pos[16] ; master_clk ; master_clk ; None                        ; None                      ; 6.676 ns                ;
+; N/A                                     ; 145.33 MHz ( period = 6.881 ns )                    ; rocket_x_pos[9]  ; rocket_x_pos[17] ; master_clk ; master_clk ; None                        ; None                      ; 6.676 ns                ;
+; N/A                                     ; 145.43 MHz ( period = 6.876 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[4]  ; master_clk ; master_clk ; None                        ; None                      ; 6.665 ns                ;
+; N/A                                     ; 145.69 MHz ( period = 6.864 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[8]  ; master_clk ; master_clk ; None                        ; None                      ; 6.649 ns                ;
+; N/A                                     ; 145.71 MHz ( period = 6.863 ns )                    ; rocket_x_pos[9]  ; rocket_x_pos[3]  ; master_clk ; master_clk ; None                        ; None                      ; 6.647 ns                ;
+; N/A                                     ; 146.24 MHz ( period = 6.838 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[4]  ; master_clk ; master_clk ; None                        ; None                      ; 6.626 ns                ;
+; N/A                                     ; 146.93 MHz ( period = 6.806 ns )                    ; rocket_x_pos[16] ; rocket_x_pos[0]  ; master_clk ; master_clk ; None                        ; None                      ; 6.590 ns                ;
+; N/A                                     ; 147.12 MHz ( period = 6.797 ns )                    ; rocket_x_pos[16] ; rocket_x_pos[31] ; master_clk ; master_clk ; None                        ; None                      ; 6.583 ns                ;
+; N/A                                     ; 147.12 MHz ( period = 6.797 ns )                    ; rocket_x_pos[16] ; rocket_x_pos[30] ; master_clk ; master_clk ; None                        ; None                      ; 6.583 ns                ;
+; N/A                                     ; 147.12 MHz ( period = 6.797 ns )                    ; rocket_x_pos[16] ; rocket_x_pos[27] ; master_clk ; master_clk ; None                        ; None                      ; 6.583 ns                ;
+; N/A                                     ; 147.12 MHz ( period = 6.797 ns )                    ; rocket_x_pos[16] ; rocket_x_pos[28] ; master_clk ; master_clk ; None                        ; None                      ; 6.583 ns                ;
+; N/A                                     ; 147.12 MHz ( period = 6.797 ns )                    ; rocket_x_pos[16] ; rocket_x_pos[26] ; master_clk ; master_clk ; None                        ; None                      ; 6.583 ns                ;
+; N/A                                     ; 147.12 MHz ( period = 6.797 ns )                    ; rocket_x_pos[16] ; rocket_x_pos[29] ; master_clk ; master_clk ; None                        ; None                      ; 6.583 ns                ;
+; N/A                                     ; 147.12 MHz ( period = 6.797 ns )                    ; rocket_x_pos[16] ; rocket_x_pos[18] ; master_clk ; master_clk ; None                        ; None                      ; 6.583 ns                ;
+; N/A                                     ; 147.12 MHz ( period = 6.797 ns )                    ; rocket_x_pos[16] ; rocket_x_pos[19] ; master_clk ; master_clk ; None                        ; None                      ; 6.583 ns                ;
+; N/A                                     ; 147.12 MHz ( period = 6.797 ns )                    ; rocket_x_pos[16] ; rocket_x_pos[20] ; master_clk ; master_clk ; None                        ; None                      ; 6.583 ns                ;
+; N/A                                     ; 147.12 MHz ( period = 6.797 ns )                    ; rocket_x_pos[16] ; rocket_x_pos[21] ; master_clk ; master_clk ; None                        ; None                      ; 6.583 ns                ;
+; N/A                                     ; 147.12 MHz ( period = 6.797 ns )                    ; rocket_x_pos[16] ; rocket_x_pos[25] ; master_clk ; master_clk ; None                        ; None                      ; 6.583 ns                ;
+; N/A                                     ; 147.12 MHz ( period = 6.797 ns )                    ; rocket_x_pos[16] ; rocket_x_pos[24] ; master_clk ; master_clk ; None                        ; None                      ; 6.583 ns                ;
+; N/A                                     ; 147.12 MHz ( period = 6.797 ns )                    ; rocket_x_pos[16] ; rocket_x_pos[23] ; master_clk ; master_clk ; None                        ; None                      ; 6.583 ns                ;
+; N/A                                     ; 147.12 MHz ( period = 6.797 ns )                    ; rocket_x_pos[16] ; rocket_x_pos[22] ; master_clk ; master_clk ; None                        ; None                      ; 6.583 ns                ;
+; N/A                                     ; 147.12 MHz ( period = 6.797 ns )                    ; rocket_x_pos[16] ; rocket_x_pos[16] ; master_clk ; master_clk ; None                        ; None                      ; 6.583 ns                ;
+; N/A                                     ; 147.12 MHz ( period = 6.797 ns )                    ; rocket_x_pos[16] ; rocket_x_pos[17] ; master_clk ; master_clk ; None                        ; None                      ; 6.583 ns                ;
+; N/A                                     ; 147.36 MHz ( period = 6.786 ns )                    ; rocket_x_pos[4]  ; rocket_x_pos[8]  ; master_clk ; master_clk ; None                        ; None                      ; 6.569 ns                ;
+; N/A                                     ; 147.51 MHz ( period = 6.779 ns )                    ; rocket_x_pos[16] ; rocket_x_pos[3]  ; master_clk ; master_clk ; None                        ; None                      ; 6.554 ns                ;
+; N/A                                     ; 147.91 MHz ( period = 6.761 ns )                    ; rocket_x_pos[7]  ; rocket_x_pos[8]  ; master_clk ; master_clk ; None                        ; None                      ; 6.546 ns                ;
+; N/A                                     ; 147.93 MHz ( period = 6.760 ns )                    ; rocket_x_pos[4]  ; rocket_x_pos[4]  ; master_clk ; master_clk ; None                        ; None                      ; 6.546 ns                ;
+; N/A                                     ; 148.26 MHz ( period = 6.745 ns )                    ; rocket_x_pos[10] ; rocket_x_pos[0]  ; master_clk ; master_clk ; None                        ; None                      ; 6.538 ns                ;
+; N/A                                     ; 148.46 MHz ( period = 6.736 ns )                    ; rocket_x_pos[10] ; rocket_x_pos[31] ; master_clk ; master_clk ; None                        ; None                      ; 6.531 ns                ;
+; N/A                                     ; 148.46 MHz ( period = 6.736 ns )                    ; rocket_x_pos[10] ; rocket_x_pos[30] ; master_clk ; master_clk ; None                        ; None                      ; 6.531 ns                ;
+; N/A                                     ; 148.46 MHz ( period = 6.736 ns )                    ; rocket_x_pos[10] ; rocket_x_pos[27] ; master_clk ; master_clk ; None                        ; None                      ; 6.531 ns                ;
+; N/A                                     ; 148.46 MHz ( period = 6.736 ns )                    ; rocket_x_pos[10] ; rocket_x_pos[28] ; master_clk ; master_clk ; None                        ; None                      ; 6.531 ns                ;
+; N/A                                     ; 148.46 MHz ( period = 6.736 ns )                    ; rocket_x_pos[10] ; rocket_x_pos[26] ; master_clk ; master_clk ; None                        ; None                      ; 6.531 ns                ;
+; N/A                                     ; 148.46 MHz ( period = 6.736 ns )                    ; rocket_x_pos[10] ; rocket_x_pos[29] ; master_clk ; master_clk ; None                        ; None                      ; 6.531 ns                ;
+; N/A                                     ; 148.46 MHz ( period = 6.736 ns )                    ; rocket_x_pos[10] ; rocket_x_pos[18] ; master_clk ; master_clk ; None                        ; None                      ; 6.531 ns                ;
+; N/A                                     ; 148.46 MHz ( period = 6.736 ns )                    ; rocket_x_pos[10] ; rocket_x_pos[19] ; master_clk ; master_clk ; None                        ; None                      ; 6.531 ns                ;
+; N/A                                     ; 148.46 MHz ( period = 6.736 ns )                    ; rocket_x_pos[10] ; rocket_x_pos[20] ; master_clk ; master_clk ; None                        ; None                      ; 6.531 ns                ;
+; N/A                                     ; 148.46 MHz ( period = 6.736 ns )                    ; rocket_x_pos[10] ; rocket_x_pos[21] ; master_clk ; master_clk ; None                        ; None                      ; 6.531 ns                ;
+; N/A                                     ; 148.46 MHz ( period = 6.736 ns )                    ; rocket_x_pos[10] ; rocket_x_pos[25] ; master_clk ; master_clk ; None                        ; None                      ; 6.531 ns                ;
+; N/A                                     ; 148.46 MHz ( period = 6.736 ns )                    ; rocket_x_pos[10] ; rocket_x_pos[24] ; master_clk ; master_clk ; None                        ; None                      ; 6.531 ns                ;
+; N/A                                     ; 148.46 MHz ( period = 6.736 ns )                    ; rocket_x_pos[10] ; rocket_x_pos[23] ; master_clk ; master_clk ; None                        ; None                      ; 6.531 ns                ;
+; N/A                                     ; 148.46 MHz ( period = 6.736 ns )                    ; rocket_x_pos[10] ; rocket_x_pos[22] ; master_clk ; master_clk ; None                        ; None                      ; 6.531 ns                ;
+; N/A                                     ; 148.46 MHz ( period = 6.736 ns )                    ; rocket_x_pos[10] ; rocket_x_pos[16] ; master_clk ; master_clk ; None                        ; None                      ; 6.531 ns                ;
+; N/A                                     ; 148.46 MHz ( period = 6.736 ns )                    ; rocket_x_pos[10] ; rocket_x_pos[17] ; master_clk ; master_clk ; None                        ; None                      ; 6.531 ns                ;
+; N/A                                     ; 148.48 MHz ( period = 6.735 ns )                    ; rocket_x_pos[7]  ; rocket_x_pos[4]  ; master_clk ; master_clk ; None                        ; None                      ; 6.523 ns                ;
+; N/A                                     ; 148.59 MHz ( period = 6.730 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[7]  ; master_clk ; master_clk ; None                        ; None                      ; 6.516 ns                ;
+; N/A                                     ; 148.59 MHz ( period = 6.730 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[6]  ; master_clk ; master_clk ; None                        ; None                      ; 6.516 ns                ;
+; N/A                                     ; 148.59 MHz ( period = 6.730 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[5]  ; master_clk ; master_clk ; None                        ; None                      ; 6.516 ns                ;
+; N/A                                     ; 148.59 MHz ( period = 6.730 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[9]  ; master_clk ; master_clk ; None                        ; None                      ; 6.516 ns                ;
+; N/A                                     ; 148.59 MHz ( period = 6.730 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[2]  ; master_clk ; master_clk ; None                        ; None                      ; 6.516 ns                ;
+; N/A                                     ; 148.59 MHz ( period = 6.730 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[1]  ; master_clk ; master_clk ; None                        ; None                      ; 6.516 ns                ;
+; N/A                                     ; 148.59 MHz ( period = 6.730 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[14] ; master_clk ; master_clk ; None                        ; None                      ; 6.516 ns                ;
+; N/A                                     ; 148.59 MHz ( period = 6.730 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[15] ; master_clk ; master_clk ; None                        ; None                      ; 6.516 ns                ;
+; N/A                                     ; 148.59 MHz ( period = 6.730 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[11] ; master_clk ; master_clk ; None                        ; None                      ; 6.516 ns                ;
+; N/A                                     ; 148.59 MHz ( period = 6.730 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[13] ; master_clk ; master_clk ; None                        ; None                      ; 6.516 ns                ;
+; N/A                                     ; 148.59 MHz ( period = 6.730 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[12] ; master_clk ; master_clk ; None                        ; None                      ; 6.516 ns                ;
+; N/A                                     ; 148.59 MHz ( period = 6.730 ns )                    ; rocket_x_pos[5]  ; rocket_x_pos[10] ; master_clk ; master_clk ; None                        ; None                      ; 6.516 ns                ;
+; N/A                                     ; 148.85 MHz ( period = 6.718 ns )                    ; rocket_x_pos[10] ; rocket_x_pos[3]  ; master_clk ; master_clk ; None                        ; None                      ; 6.502 ns                ;
+; N/A                                     ; 149.48 MHz ( period = 6.690 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[7]  ; master_clk ; master_clk ; None                        ; None                      ; 6.477 ns                ;
+; N/A                                     ; 149.48 MHz ( period = 6.690 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[6]  ; master_clk ; master_clk ; None                        ; None                      ; 6.477 ns                ;
+; N/A                                     ; 149.48 MHz ( period = 6.690 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[5]  ; master_clk ; master_clk ; None                        ; None                      ; 6.477 ns                ;
+; N/A                                     ; 149.48 MHz ( period = 6.690 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[9]  ; master_clk ; master_clk ; None                        ; None                      ; 6.477 ns                ;
+; N/A                                     ; 149.48 MHz ( period = 6.690 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[2]  ; master_clk ; master_clk ; None                        ; None                      ; 6.477 ns                ;
+; N/A                                     ; 149.48 MHz ( period = 6.690 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[1]  ; master_clk ; master_clk ; None                        ; None                      ; 6.477 ns                ;
+; N/A                                     ; 149.48 MHz ( period = 6.690 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[14] ; master_clk ; master_clk ; None                        ; None                      ; 6.477 ns                ;
+; N/A                                     ; 149.48 MHz ( period = 6.690 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[15] ; master_clk ; master_clk ; None                        ; None                      ; 6.477 ns                ;
+; N/A                                     ; 149.48 MHz ( period = 6.690 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[11] ; master_clk ; master_clk ; None                        ; None                      ; 6.477 ns                ;
+; N/A                                     ; 149.48 MHz ( period = 6.690 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[13] ; master_clk ; master_clk ; None                        ; None                      ; 6.477 ns                ;
+; N/A                                     ; 149.48 MHz ( period = 6.690 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[12] ; master_clk ; master_clk ; None                        ; None                      ; 6.477 ns                ;
+; N/A                                     ; 149.48 MHz ( period = 6.690 ns )                    ; rocket_x_pos[8]  ; rocket_x_pos[10] ; master_clk ; master_clk ; None                        ; None                      ; 6.477 ns                ;
+; N/A                                     ; 150.33 MHz ( period = 6.652 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[7]  ; master_clk ; master_clk ; None                        ; None                      ; 6.438 ns                ;
+; N/A                                     ; 150.33 MHz ( period = 6.652 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[6]  ; master_clk ; master_clk ; None                        ; None                      ; 6.438 ns                ;
+; N/A                                     ; 150.33 MHz ( period = 6.652 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[5]  ; master_clk ; master_clk ; None                        ; None                      ; 6.438 ns                ;
+; N/A                                     ; 150.33 MHz ( period = 6.652 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[9]  ; master_clk ; master_clk ; None                        ; None                      ; 6.438 ns                ;
+; N/A                                     ; 150.33 MHz ( period = 6.652 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[2]  ; master_clk ; master_clk ; None                        ; None                      ; 6.438 ns                ;
+; N/A                                     ; 150.33 MHz ( period = 6.652 ns )                    ; rocket_x_pos[11] ; rocket_x_pos[0]  ; master_clk ; master_clk ; None                        ; None                      ; 6.445 ns                ;
+; N/A                                     ; 150.33 MHz ( period = 6.652 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[1]  ; master_clk ; master_clk ; None                        ; None                      ; 6.438 ns                ;
+; N/A                                     ; 150.33 MHz ( period = 6.652 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[14] ; master_clk ; master_clk ; None                        ; None                      ; 6.438 ns                ;
+; N/A                                     ; 150.33 MHz ( period = 6.652 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[15] ; master_clk ; master_clk ; None                        ; None                      ; 6.438 ns                ;
+; N/A                                     ; 150.33 MHz ( period = 6.652 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[11] ; master_clk ; master_clk ; None                        ; None                      ; 6.438 ns                ;
+; N/A                                     ; 150.33 MHz ( period = 6.652 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[13] ; master_clk ; master_clk ; None                        ; None                      ; 6.438 ns                ;
+; N/A                                     ; 150.33 MHz ( period = 6.652 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[12] ; master_clk ; master_clk ; None                        ; None                      ; 6.438 ns                ;
+; N/A                                     ; 150.33 MHz ( period = 6.652 ns )                    ; rocket_x_pos[6]  ; rocket_x_pos[10] ; master_clk ; master_clk ; None                        ; None                      ; 6.438 ns                ;
+; N/A                                     ; 150.53 MHz ( period = 6.643 ns )                    ; rocket_x_pos[11] ; rocket_x_pos[18] ; master_clk ; master_clk ; None                        ; None                      ; 6.438 ns                ;
+; N/A                                     ; 150.53 MHz ( period = 6.643 ns )                    ; rocket_x_pos[11] ; rocket_x_pos[19] ; master_clk ; master_clk ; None                        ; None                      ; 6.438 ns                ;
+; N/A                                     ; 150.53 MHz ( period = 6.643 ns )                    ; rocket_x_pos[11] ; rocket_x_pos[20] ; master_clk ; master_clk ; None                        ; None                      ; 6.438 ns                ;
+; N/A                                     ; 150.53 MHz ( period = 6.643 ns )                    ; rocket_x_pos[11] ; rocket_x_pos[21] ; master_clk ; master_clk ; None                        ; None                      ; 6.438 ns                ;
+; N/A                                     ; 150.53 MHz ( period = 6.643 ns )                    ; rocket_x_pos[11] ; rocket_x_pos[25] ; master_clk ; master_clk ; None                        ; None                      ; 6.438 ns                ;
+; N/A                                     ; 150.53 MHz ( period = 6.643 ns )                    ; rocket_x_pos[11] ; rocket_x_pos[24] ; master_clk ; master_clk ; None                        ; None                      ; 6.438 ns                ;
+; N/A                                     ; 150.53 MHz ( period = 6.643 ns )                    ; rocket_x_pos[11] ; rocket_x_pos[23] ; master_clk ; master_clk ; None                        ; None                      ; 6.438 ns                ;
+; N/A                                     ; 150.53 MHz ( period = 6.643 ns )                    ; rocket_x_pos[11] ; rocket_x_pos[22] ; master_clk ; master_clk ; None                        ; None                      ; 6.438 ns                ;
+; N/A                                     ; 150.53 MHz ( period = 6.643 ns )                    ; rocket_x_pos[11] ; rocket_x_pos[16] ; master_clk ; master_clk ; None                        ; None                      ; 6.438 ns                ;
+; Timing analysis restricted to 200 rows. ; To change the limit use Settings (Assignments menu) ;                  ;                  ;            ;            ;                             ;                           ;                         ;
++-----------------------------------------+-----------------------------------------------------+------------------+------------------+------------+------------+-----------------------------+---------------------------+-------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Setup: 'kb_clk'                                                                                                                                                                                                                                             ;
++-----------------------------------------+-----------------------------------------------------+------------------------+------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; Slack                                   ; Actual fmax (period)                                ; From                   ; To                           ; From Clock ; To Clock ; Required Setup Relationship ; Required Longest P2P Time ; Actual Longest P2P Time ;
++-----------------------------------------+-----------------------------------------------------+------------------------+------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; N/A                                     ; 149.88 MHz ( period = 6.672 ns )                    ; keyboard:key|count[0]  ; keyboard:key|previousCode[2] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.432 ns                ;
+; N/A                                     ; 149.88 MHz ( period = 6.672 ns )                    ; keyboard:key|count[0]  ; keyboard:key|previousCode[3] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.432 ns                ;
+; N/A                                     ; 149.88 MHz ( period = 6.672 ns )                    ; keyboard:key|count[0]  ; keyboard:key|previousCode[1] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.432 ns                ;
+; N/A                                     ; 149.88 MHz ( period = 6.672 ns )                    ; keyboard:key|count[0]  ; keyboard:key|previousCode[4] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.432 ns                ;
+; N/A                                     ; 149.88 MHz ( period = 6.672 ns )                    ; keyboard:key|count[0]  ; keyboard:key|previousCode[7] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.432 ns                ;
+; N/A                                     ; 149.88 MHz ( period = 6.672 ns )                    ; keyboard:key|count[0]  ; keyboard:key|previousCode[5] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.432 ns                ;
+; N/A                                     ; 149.95 MHz ( period = 6.669 ns )                    ; keyboard:key|count[0]  ; keyboard:key|code[1]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.430 ns                ;
+; N/A                                     ; 149.95 MHz ( period = 6.669 ns )                    ; keyboard:key|count[0]  ; keyboard:key|code[5]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.430 ns                ;
+; N/A                                     ; 149.95 MHz ( period = 6.669 ns )                    ; keyboard:key|count[0]  ; keyboard:key|code[3]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.430 ns                ;
+; N/A                                     ; 149.95 MHz ( period = 6.669 ns )                    ; keyboard:key|count[0]  ; keyboard:key|code[4]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.430 ns                ;
+; N/A                                     ; 149.95 MHz ( period = 6.669 ns )                    ; keyboard:key|count[0]  ; keyboard:key|code[2]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.430 ns                ;
+; N/A                                     ; 151.31 MHz ( period = 6.609 ns )                    ; keyboard:key|count[1]  ; keyboard:key|previousCode[2] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.369 ns                ;
+; N/A                                     ; 151.31 MHz ( period = 6.609 ns )                    ; keyboard:key|count[1]  ; keyboard:key|previousCode[3] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.369 ns                ;
+; N/A                                     ; 151.31 MHz ( period = 6.609 ns )                    ; keyboard:key|count[1]  ; keyboard:key|previousCode[1] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.369 ns                ;
+; N/A                                     ; 151.31 MHz ( period = 6.609 ns )                    ; keyboard:key|count[1]  ; keyboard:key|previousCode[4] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.369 ns                ;
+; N/A                                     ; 151.31 MHz ( period = 6.609 ns )                    ; keyboard:key|count[1]  ; keyboard:key|previousCode[7] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.369 ns                ;
+; N/A                                     ; 151.31 MHz ( period = 6.609 ns )                    ; keyboard:key|count[1]  ; keyboard:key|previousCode[5] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.369 ns                ;
+; N/A                                     ; 151.38 MHz ( period = 6.606 ns )                    ; keyboard:key|count[1]  ; keyboard:key|code[1]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.367 ns                ;
+; N/A                                     ; 151.38 MHz ( period = 6.606 ns )                    ; keyboard:key|count[1]  ; keyboard:key|code[5]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.367 ns                ;
+; N/A                                     ; 151.38 MHz ( period = 6.606 ns )                    ; keyboard:key|count[1]  ; keyboard:key|code[3]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.367 ns                ;
+; N/A                                     ; 151.38 MHz ( period = 6.606 ns )                    ; keyboard:key|count[1]  ; keyboard:key|code[4]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.367 ns                ;
+; N/A                                     ; 151.38 MHz ( period = 6.606 ns )                    ; keyboard:key|count[1]  ; keyboard:key|code[2]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.367 ns                ;
+; N/A                                     ; 151.68 MHz ( period = 6.593 ns )                    ; keyboard:key|count[0]  ; keyboard:key|code[0]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.203 ns                ;
+; N/A                                     ; 151.68 MHz ( period = 6.593 ns )                    ; keyboard:key|count[0]  ; keyboard:key|code[6]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.203 ns                ;
+; N/A                                     ; 151.68 MHz ( period = 6.593 ns )                    ; keyboard:key|count[0]  ; keyboard:key|code[7]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.203 ns                ;
+; N/A                                     ; 153.14 MHz ( period = 6.530 ns )                    ; keyboard:key|count[1]  ; keyboard:key|code[0]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.140 ns                ;
+; N/A                                     ; 153.14 MHz ( period = 6.530 ns )                    ; keyboard:key|count[1]  ; keyboard:key|code[6]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.140 ns                ;
+; N/A                                     ; 153.14 MHz ( period = 6.530 ns )                    ; keyboard:key|count[1]  ; keyboard:key|code[7]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.140 ns                ;
+; N/A                                     ; 155.69 MHz ( period = 6.423 ns )                    ; keyboard:key|count[3]  ; keyboard:key|previousCode[2] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.183 ns                ;
+; N/A                                     ; 155.69 MHz ( period = 6.423 ns )                    ; keyboard:key|count[3]  ; keyboard:key|previousCode[3] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.183 ns                ;
+; N/A                                     ; 155.69 MHz ( period = 6.423 ns )                    ; keyboard:key|count[3]  ; keyboard:key|previousCode[1] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.183 ns                ;
+; N/A                                     ; 155.69 MHz ( period = 6.423 ns )                    ; keyboard:key|count[3]  ; keyboard:key|previousCode[4] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.183 ns                ;
+; N/A                                     ; 155.69 MHz ( period = 6.423 ns )                    ; keyboard:key|count[3]  ; keyboard:key|previousCode[7] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.183 ns                ;
+; N/A                                     ; 155.69 MHz ( period = 6.423 ns )                    ; keyboard:key|count[3]  ; keyboard:key|previousCode[5] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.183 ns                ;
+; N/A                                     ; 155.76 MHz ( period = 6.420 ns )                    ; keyboard:key|count[3]  ; keyboard:key|code[1]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.181 ns                ;
+; N/A                                     ; 155.76 MHz ( period = 6.420 ns )                    ; keyboard:key|count[3]  ; keyboard:key|code[5]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.181 ns                ;
+; N/A                                     ; 155.76 MHz ( period = 6.420 ns )                    ; keyboard:key|count[3]  ; keyboard:key|code[3]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.181 ns                ;
+; N/A                                     ; 155.76 MHz ( period = 6.420 ns )                    ; keyboard:key|count[3]  ; keyboard:key|code[4]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.181 ns                ;
+; N/A                                     ; 155.76 MHz ( period = 6.420 ns )                    ; keyboard:key|count[3]  ; keyboard:key|code[2]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.181 ns                ;
+; N/A                                     ; 157.63 MHz ( period = 6.344 ns )                    ; keyboard:key|count[3]  ; keyboard:key|code[0]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.954 ns                ;
+; N/A                                     ; 157.63 MHz ( period = 6.344 ns )                    ; keyboard:key|count[3]  ; keyboard:key|code[6]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.954 ns                ;
+; N/A                                     ; 157.63 MHz ( period = 6.344 ns )                    ; keyboard:key|count[3]  ; keyboard:key|code[7]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.954 ns                ;
+; N/A                                     ; 157.70 MHz ( period = 6.341 ns )                    ; keyboard:key|count[2]  ; keyboard:key|previousCode[2] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.115 ns                ;
+; N/A                                     ; 157.70 MHz ( period = 6.341 ns )                    ; keyboard:key|count[2]  ; keyboard:key|previousCode[3] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.115 ns                ;
+; N/A                                     ; 157.70 MHz ( period = 6.341 ns )                    ; keyboard:key|count[2]  ; keyboard:key|previousCode[1] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.115 ns                ;
+; N/A                                     ; 157.70 MHz ( period = 6.341 ns )                    ; keyboard:key|count[2]  ; keyboard:key|previousCode[4] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.115 ns                ;
+; N/A                                     ; 157.70 MHz ( period = 6.341 ns )                    ; keyboard:key|count[2]  ; keyboard:key|previousCode[7] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.115 ns                ;
+; N/A                                     ; 157.70 MHz ( period = 6.341 ns )                    ; keyboard:key|count[2]  ; keyboard:key|previousCode[5] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.115 ns                ;
+; N/A                                     ; 157.78 MHz ( period = 6.338 ns )                    ; keyboard:key|count[2]  ; keyboard:key|code[1]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.113 ns                ;
+; N/A                                     ; 157.78 MHz ( period = 6.338 ns )                    ; keyboard:key|count[2]  ; keyboard:key|code[5]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.113 ns                ;
+; N/A                                     ; 157.78 MHz ( period = 6.338 ns )                    ; keyboard:key|count[2]  ; keyboard:key|code[3]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.113 ns                ;
+; N/A                                     ; 157.78 MHz ( period = 6.338 ns )                    ; keyboard:key|count[2]  ; keyboard:key|code[4]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.113 ns                ;
+; N/A                                     ; 157.78 MHz ( period = 6.338 ns )                    ; keyboard:key|count[2]  ; keyboard:key|code[2]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.113 ns                ;
+; N/A                                     ; 159.69 MHz ( period = 6.262 ns )                    ; keyboard:key|count[2]  ; keyboard:key|code[0]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.886 ns                ;
+; N/A                                     ; 159.69 MHz ( period = 6.262 ns )                    ; keyboard:key|count[2]  ; keyboard:key|code[6]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.886 ns                ;
+; N/A                                     ; 159.69 MHz ( period = 6.262 ns )                    ; keyboard:key|count[2]  ; keyboard:key|code[7]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.886 ns                ;
+; N/A                                     ; 159.77 MHz ( period = 6.259 ns )                    ; keyboard:key|count[0]  ; keyboard:key|previousCode[0] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.017 ns                ;
+; N/A                                     ; 159.77 MHz ( period = 6.259 ns )                    ; keyboard:key|count[0]  ; keyboard:key|previousCode[6] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.017 ns                ;
+; N/A                                     ; 159.97 MHz ( period = 6.251 ns )                    ; keyboard:key|count[0]  ; keyboard:key|count[1]        ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.037 ns                ;
+; N/A                                     ; 160.00 MHz ( period = 6.250 ns )                    ; keyboard:key|count[0]  ; keyboard:key|count[3]        ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.036 ns                ;
+; N/A                                     ; 160.00 MHz ( period = 6.250 ns )                    ; keyboard:key|count[0]  ; keyboard:key|count[0]        ; kb_clk     ; kb_clk   ; None                        ; None                      ; 6.036 ns                ;
+; N/A                                     ; 161.32 MHz ( period = 6.199 ns )                    ; keyboard:key|count[4]  ; keyboard:key|previousCode[2] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.973 ns                ;
+; N/A                                     ; 161.32 MHz ( period = 6.199 ns )                    ; keyboard:key|count[4]  ; keyboard:key|previousCode[3] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.973 ns                ;
+; N/A                                     ; 161.32 MHz ( period = 6.199 ns )                    ; keyboard:key|count[4]  ; keyboard:key|previousCode[1] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.973 ns                ;
+; N/A                                     ; 161.32 MHz ( period = 6.199 ns )                    ; keyboard:key|count[4]  ; keyboard:key|previousCode[4] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.973 ns                ;
+; N/A                                     ; 161.32 MHz ( period = 6.199 ns )                    ; keyboard:key|count[4]  ; keyboard:key|previousCode[7] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.973 ns                ;
+; N/A                                     ; 161.32 MHz ( period = 6.199 ns )                    ; keyboard:key|count[4]  ; keyboard:key|previousCode[5] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.973 ns                ;
+; N/A                                     ; 161.39 MHz ( period = 6.196 ns )                    ; keyboard:key|count[4]  ; keyboard:key|code[1]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.971 ns                ;
+; N/A                                     ; 161.39 MHz ( period = 6.196 ns )                    ; keyboard:key|count[4]  ; keyboard:key|code[5]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.971 ns                ;
+; N/A                                     ; 161.39 MHz ( period = 6.196 ns )                    ; keyboard:key|count[4]  ; keyboard:key|code[3]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.971 ns                ;
+; N/A                                     ; 161.39 MHz ( period = 6.196 ns )                    ; keyboard:key|count[4]  ; keyboard:key|code[4]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.971 ns                ;
+; N/A                                     ; 161.39 MHz ( period = 6.196 ns )                    ; keyboard:key|count[4]  ; keyboard:key|code[2]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.971 ns                ;
+; N/A                                     ; 161.39 MHz ( period = 6.196 ns )                    ; keyboard:key|count[1]  ; keyboard:key|previousCode[0] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.954 ns                ;
+; N/A                                     ; 161.39 MHz ( period = 6.196 ns )                    ; keyboard:key|count[1]  ; keyboard:key|previousCode[6] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.954 ns                ;
+; N/A                                     ; 161.60 MHz ( period = 6.188 ns )                    ; keyboard:key|count[1]  ; keyboard:key|count[1]        ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.974 ns                ;
+; N/A                                     ; 161.63 MHz ( period = 6.187 ns )                    ; keyboard:key|count[1]  ; keyboard:key|count[3]        ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.973 ns                ;
+; N/A                                     ; 161.63 MHz ( period = 6.187 ns )                    ; keyboard:key|count[1]  ; keyboard:key|count[0]        ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.973 ns                ;
+; N/A                                     ; 162.52 MHz ( period = 6.153 ns )                    ; keyboard:key|count[5]  ; keyboard:key|previousCode[2] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.927 ns                ;
+; N/A                                     ; 162.52 MHz ( period = 6.153 ns )                    ; keyboard:key|count[5]  ; keyboard:key|previousCode[3] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.927 ns                ;
+; N/A                                     ; 162.52 MHz ( period = 6.153 ns )                    ; keyboard:key|count[5]  ; keyboard:key|previousCode[1] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.927 ns                ;
+; N/A                                     ; 162.52 MHz ( period = 6.153 ns )                    ; keyboard:key|count[5]  ; keyboard:key|previousCode[4] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.927 ns                ;
+; N/A                                     ; 162.52 MHz ( period = 6.153 ns )                    ; keyboard:key|count[5]  ; keyboard:key|previousCode[7] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.927 ns                ;
+; N/A                                     ; 162.52 MHz ( period = 6.153 ns )                    ; keyboard:key|count[5]  ; keyboard:key|previousCode[5] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.927 ns                ;
+; N/A                                     ; 162.60 MHz ( period = 6.150 ns )                    ; keyboard:key|count[5]  ; keyboard:key|code[1]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.925 ns                ;
+; N/A                                     ; 162.60 MHz ( period = 6.150 ns )                    ; keyboard:key|count[5]  ; keyboard:key|code[5]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.925 ns                ;
+; N/A                                     ; 162.60 MHz ( period = 6.150 ns )                    ; keyboard:key|count[5]  ; keyboard:key|code[3]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.925 ns                ;
+; N/A                                     ; 162.60 MHz ( period = 6.150 ns )                    ; keyboard:key|count[5]  ; keyboard:key|code[4]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.925 ns                ;
+; N/A                                     ; 162.60 MHz ( period = 6.150 ns )                    ; keyboard:key|count[5]  ; keyboard:key|code[2]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.925 ns                ;
+; N/A                                     ; 163.40 MHz ( period = 6.120 ns )                    ; keyboard:key|count[4]  ; keyboard:key|code[0]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.744 ns                ;
+; N/A                                     ; 163.40 MHz ( period = 6.120 ns )                    ; keyboard:key|count[4]  ; keyboard:key|code[6]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.744 ns                ;
+; N/A                                     ; 163.40 MHz ( period = 6.120 ns )                    ; keyboard:key|count[4]  ; keyboard:key|code[7]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.744 ns                ;
+; N/A                                     ; 164.42 MHz ( period = 6.082 ns )                    ; keyboard:key|count[6]  ; keyboard:key|previousCode[2] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.856 ns                ;
+; N/A                                     ; 164.42 MHz ( period = 6.082 ns )                    ; keyboard:key|count[6]  ; keyboard:key|previousCode[3] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.856 ns                ;
+; N/A                                     ; 164.42 MHz ( period = 6.082 ns )                    ; keyboard:key|count[6]  ; keyboard:key|previousCode[1] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.856 ns                ;
+; N/A                                     ; 164.42 MHz ( period = 6.082 ns )                    ; keyboard:key|count[6]  ; keyboard:key|previousCode[4] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.856 ns                ;
+; N/A                                     ; 164.42 MHz ( period = 6.082 ns )                    ; keyboard:key|count[6]  ; keyboard:key|previousCode[7] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.856 ns                ;
+; N/A                                     ; 164.42 MHz ( period = 6.082 ns )                    ; keyboard:key|count[6]  ; keyboard:key|previousCode[5] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.856 ns                ;
+; N/A                                     ; 164.50 MHz ( period = 6.079 ns )                    ; keyboard:key|count[6]  ; keyboard:key|code[1]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.854 ns                ;
+; N/A                                     ; 164.50 MHz ( period = 6.079 ns )                    ; keyboard:key|count[6]  ; keyboard:key|code[5]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.854 ns                ;
+; N/A                                     ; 164.50 MHz ( period = 6.079 ns )                    ; keyboard:key|count[6]  ; keyboard:key|code[3]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.854 ns                ;
+; N/A                                     ; 164.50 MHz ( period = 6.079 ns )                    ; keyboard:key|count[6]  ; keyboard:key|code[4]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.854 ns                ;
+; N/A                                     ; 164.50 MHz ( period = 6.079 ns )                    ; keyboard:key|count[6]  ; keyboard:key|code[2]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.854 ns                ;
+; N/A                                     ; 164.64 MHz ( period = 6.074 ns )                    ; keyboard:key|count[5]  ; keyboard:key|code[0]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.698 ns                ;
+; N/A                                     ; 164.64 MHz ( period = 6.074 ns )                    ; keyboard:key|count[5]  ; keyboard:key|code[6]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.698 ns                ;
+; N/A                                     ; 164.64 MHz ( period = 6.074 ns )                    ; keyboard:key|count[5]  ; keyboard:key|code[7]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.698 ns                ;
+; N/A                                     ; 166.39 MHz ( period = 6.010 ns )                    ; keyboard:key|count[3]  ; keyboard:key|previousCode[0] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.768 ns                ;
+; N/A                                     ; 166.39 MHz ( period = 6.010 ns )                    ; keyboard:key|count[3]  ; keyboard:key|previousCode[6] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.768 ns                ;
+; N/A                                     ; 166.58 MHz ( period = 6.003 ns )                    ; keyboard:key|count[6]  ; keyboard:key|code[0]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.627 ns                ;
+; N/A                                     ; 166.58 MHz ( period = 6.003 ns )                    ; keyboard:key|count[6]  ; keyboard:key|code[6]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.627 ns                ;
+; N/A                                     ; 166.58 MHz ( period = 6.003 ns )                    ; keyboard:key|count[6]  ; keyboard:key|code[7]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.627 ns                ;
+; N/A                                     ; 166.61 MHz ( period = 6.002 ns )                    ; keyboard:key|count[3]  ; keyboard:key|count[1]        ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.788 ns                ;
+; N/A                                     ; 166.64 MHz ( period = 6.001 ns )                    ; keyboard:key|count[3]  ; keyboard:key|count[3]        ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.787 ns                ;
+; N/A                                     ; 166.64 MHz ( period = 6.001 ns )                    ; keyboard:key|count[3]  ; keyboard:key|count[0]        ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.787 ns                ;
+; N/A                                     ; 167.14 MHz ( period = 5.983 ns )                    ; keyboard:key|count[7]  ; keyboard:key|previousCode[2] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.757 ns                ;
+; N/A                                     ; 167.14 MHz ( period = 5.983 ns )                    ; keyboard:key|count[7]  ; keyboard:key|previousCode[3] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.757 ns                ;
+; N/A                                     ; 167.14 MHz ( period = 5.983 ns )                    ; keyboard:key|count[7]  ; keyboard:key|previousCode[1] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.757 ns                ;
+; N/A                                     ; 167.14 MHz ( period = 5.983 ns )                    ; keyboard:key|count[7]  ; keyboard:key|previousCode[4] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.757 ns                ;
+; N/A                                     ; 167.14 MHz ( period = 5.983 ns )                    ; keyboard:key|count[7]  ; keyboard:key|previousCode[7] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.757 ns                ;
+; N/A                                     ; 167.14 MHz ( period = 5.983 ns )                    ; keyboard:key|count[7]  ; keyboard:key|previousCode[5] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.757 ns                ;
+; N/A                                     ; 167.22 MHz ( period = 5.980 ns )                    ; keyboard:key|count[7]  ; keyboard:key|code[1]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.755 ns                ;
+; N/A                                     ; 167.22 MHz ( period = 5.980 ns )                    ; keyboard:key|count[7]  ; keyboard:key|code[5]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.755 ns                ;
+; N/A                                     ; 167.22 MHz ( period = 5.980 ns )                    ; keyboard:key|count[7]  ; keyboard:key|code[3]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.755 ns                ;
+; N/A                                     ; 167.22 MHz ( period = 5.980 ns )                    ; keyboard:key|count[7]  ; keyboard:key|code[4]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.755 ns                ;
+; N/A                                     ; 167.22 MHz ( period = 5.980 ns )                    ; keyboard:key|count[7]  ; keyboard:key|code[2]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.755 ns                ;
+; N/A                                     ; 168.69 MHz ( period = 5.928 ns )                    ; keyboard:key|count[2]  ; keyboard:key|previousCode[0] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.700 ns                ;
+; N/A                                     ; 168.69 MHz ( period = 5.928 ns )                    ; keyboard:key|count[2]  ; keyboard:key|previousCode[6] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.700 ns                ;
+; N/A                                     ; 168.92 MHz ( period = 5.920 ns )                    ; keyboard:key|count[2]  ; keyboard:key|count[1]        ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.720 ns                ;
+; N/A                                     ; 168.95 MHz ( period = 5.919 ns )                    ; keyboard:key|count[2]  ; keyboard:key|count[3]        ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.719 ns                ;
+; N/A                                     ; 168.95 MHz ( period = 5.919 ns )                    ; keyboard:key|count[2]  ; keyboard:key|count[0]        ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.719 ns                ;
+; N/A                                     ; 169.38 MHz ( period = 5.904 ns )                    ; keyboard:key|count[7]  ; keyboard:key|code[0]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.528 ns                ;
+; N/A                                     ; 169.38 MHz ( period = 5.904 ns )                    ; keyboard:key|count[7]  ; keyboard:key|code[6]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.528 ns                ;
+; N/A                                     ; 169.38 MHz ( period = 5.904 ns )                    ; keyboard:key|count[7]  ; keyboard:key|code[7]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.528 ns                ;
+; N/A                                     ; 170.79 MHz ( period = 5.855 ns )                    ; keyboard:key|count[8]  ; keyboard:key|previousCode[2] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.629 ns                ;
+; N/A                                     ; 170.79 MHz ( period = 5.855 ns )                    ; keyboard:key|count[8]  ; keyboard:key|previousCode[3] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.629 ns                ;
+; N/A                                     ; 170.79 MHz ( period = 5.855 ns )                    ; keyboard:key|count[8]  ; keyboard:key|previousCode[1] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.629 ns                ;
+; N/A                                     ; 170.79 MHz ( period = 5.855 ns )                    ; keyboard:key|count[8]  ; keyboard:key|previousCode[4] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.629 ns                ;
+; N/A                                     ; 170.79 MHz ( period = 5.855 ns )                    ; keyboard:key|count[8]  ; keyboard:key|previousCode[7] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.629 ns                ;
+; N/A                                     ; 170.79 MHz ( period = 5.855 ns )                    ; keyboard:key|count[8]  ; keyboard:key|previousCode[5] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.629 ns                ;
+; N/A                                     ; 170.88 MHz ( period = 5.852 ns )                    ; keyboard:key|count[8]  ; keyboard:key|code[1]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.627 ns                ;
+; N/A                                     ; 170.88 MHz ( period = 5.852 ns )                    ; keyboard:key|count[8]  ; keyboard:key|code[5]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.627 ns                ;
+; N/A                                     ; 170.88 MHz ( period = 5.852 ns )                    ; keyboard:key|count[8]  ; keyboard:key|code[3]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.627 ns                ;
+; N/A                                     ; 170.88 MHz ( period = 5.852 ns )                    ; keyboard:key|count[8]  ; keyboard:key|code[4]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.627 ns                ;
+; N/A                                     ; 170.88 MHz ( period = 5.852 ns )                    ; keyboard:key|count[8]  ; keyboard:key|code[2]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.627 ns                ;
+; N/A                                     ; 172.83 MHz ( period = 5.786 ns )                    ; keyboard:key|count[4]  ; keyboard:key|previousCode[0] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.558 ns                ;
+; N/A                                     ; 172.83 MHz ( period = 5.786 ns )                    ; keyboard:key|count[4]  ; keyboard:key|previousCode[6] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.558 ns                ;
+; N/A                                     ; 173.07 MHz ( period = 5.778 ns )                    ; keyboard:key|count[4]  ; keyboard:key|count[1]        ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.578 ns                ;
+; N/A                                     ; 173.10 MHz ( period = 5.777 ns )                    ; keyboard:key|count[4]  ; keyboard:key|count[3]        ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.577 ns                ;
+; N/A                                     ; 173.10 MHz ( period = 5.777 ns )                    ; keyboard:key|count[4]  ; keyboard:key|count[0]        ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.577 ns                ;
+; N/A                                     ; 173.13 MHz ( period = 5.776 ns )                    ; keyboard:key|count[8]  ; keyboard:key|code[0]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.400 ns                ;
+; N/A                                     ; 173.13 MHz ( period = 5.776 ns )                    ; keyboard:key|count[8]  ; keyboard:key|code[6]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.400 ns                ;
+; N/A                                     ; 173.13 MHz ( period = 5.776 ns )                    ; keyboard:key|count[8]  ; keyboard:key|code[7]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.400 ns                ;
+; N/A                                     ; 174.09 MHz ( period = 5.744 ns )                    ; keyboard:key|count[9]  ; keyboard:key|previousCode[2] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.518 ns                ;
+; N/A                                     ; 174.09 MHz ( period = 5.744 ns )                    ; keyboard:key|count[9]  ; keyboard:key|previousCode[3] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.518 ns                ;
+; N/A                                     ; 174.09 MHz ( period = 5.744 ns )                    ; keyboard:key|count[9]  ; keyboard:key|previousCode[1] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.518 ns                ;
+; N/A                                     ; 174.09 MHz ( period = 5.744 ns )                    ; keyboard:key|count[9]  ; keyboard:key|previousCode[4] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.518 ns                ;
+; N/A                                     ; 174.09 MHz ( period = 5.744 ns )                    ; keyboard:key|count[9]  ; keyboard:key|previousCode[7] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.518 ns                ;
+; N/A                                     ; 174.09 MHz ( period = 5.744 ns )                    ; keyboard:key|count[9]  ; keyboard:key|previousCode[5] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.518 ns                ;
+; N/A                                     ; 174.19 MHz ( period = 5.741 ns )                    ; keyboard:key|count[9]  ; keyboard:key|code[1]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.516 ns                ;
+; N/A                                     ; 174.19 MHz ( period = 5.741 ns )                    ; keyboard:key|count[9]  ; keyboard:key|code[5]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.516 ns                ;
+; N/A                                     ; 174.19 MHz ( period = 5.741 ns )                    ; keyboard:key|count[9]  ; keyboard:key|code[3]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.516 ns                ;
+; N/A                                     ; 174.19 MHz ( period = 5.741 ns )                    ; keyboard:key|count[9]  ; keyboard:key|code[4]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.516 ns                ;
+; N/A                                     ; 174.19 MHz ( period = 5.741 ns )                    ; keyboard:key|count[9]  ; keyboard:key|code[2]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.516 ns                ;
+; N/A                                     ; 174.22 MHz ( period = 5.740 ns )                    ; keyboard:key|count[5]  ; keyboard:key|previousCode[0] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.512 ns                ;
+; N/A                                     ; 174.22 MHz ( period = 5.740 ns )                    ; keyboard:key|count[5]  ; keyboard:key|previousCode[6] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.512 ns                ;
+; N/A                                     ; 174.46 MHz ( period = 5.732 ns )                    ; keyboard:key|count[5]  ; keyboard:key|count[1]        ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.532 ns                ;
+; N/A                                     ; 174.49 MHz ( period = 5.731 ns )                    ; keyboard:key|count[5]  ; keyboard:key|count[3]        ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.531 ns                ;
+; N/A                                     ; 174.49 MHz ( period = 5.731 ns )                    ; keyboard:key|count[5]  ; keyboard:key|count[0]        ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.531 ns                ;
+; N/A                                     ; 175.04 MHz ( period = 5.713 ns )                    ; keyboard:key|count[10] ; keyboard:key|previousCode[2] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.487 ns                ;
+; N/A                                     ; 175.04 MHz ( period = 5.713 ns )                    ; keyboard:key|count[10] ; keyboard:key|previousCode[3] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.487 ns                ;
+; N/A                                     ; 175.04 MHz ( period = 5.713 ns )                    ; keyboard:key|count[10] ; keyboard:key|previousCode[1] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.487 ns                ;
+; N/A                                     ; 175.04 MHz ( period = 5.713 ns )                    ; keyboard:key|count[10] ; keyboard:key|previousCode[4] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.487 ns                ;
+; N/A                                     ; 175.04 MHz ( period = 5.713 ns )                    ; keyboard:key|count[10] ; keyboard:key|previousCode[7] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.487 ns                ;
+; N/A                                     ; 175.04 MHz ( period = 5.713 ns )                    ; keyboard:key|count[10] ; keyboard:key|previousCode[5] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.487 ns                ;
+; N/A                                     ; 175.13 MHz ( period = 5.710 ns )                    ; keyboard:key|count[10] ; keyboard:key|code[1]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.485 ns                ;
+; N/A                                     ; 175.13 MHz ( period = 5.710 ns )                    ; keyboard:key|count[10] ; keyboard:key|code[5]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.485 ns                ;
+; N/A                                     ; 175.13 MHz ( period = 5.710 ns )                    ; keyboard:key|count[10] ; keyboard:key|code[3]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.485 ns                ;
+; N/A                                     ; 175.13 MHz ( period = 5.710 ns )                    ; keyboard:key|count[10] ; keyboard:key|code[4]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.485 ns                ;
+; N/A                                     ; 175.13 MHz ( period = 5.710 ns )                    ; keyboard:key|count[10] ; keyboard:key|code[2]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.485 ns                ;
+; N/A                                     ; 176.40 MHz ( period = 5.669 ns )                    ; keyboard:key|count[6]  ; keyboard:key|previousCode[0] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.441 ns                ;
+; N/A                                     ; 176.40 MHz ( period = 5.669 ns )                    ; keyboard:key|count[6]  ; keyboard:key|previousCode[6] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.441 ns                ;
+; N/A                                     ; 176.52 MHz ( period = 5.665 ns )                    ; keyboard:key|count[9]  ; keyboard:key|code[0]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.289 ns                ;
+; N/A                                     ; 176.52 MHz ( period = 5.665 ns )                    ; keyboard:key|count[9]  ; keyboard:key|code[6]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.289 ns                ;
+; N/A                                     ; 176.52 MHz ( period = 5.665 ns )                    ; keyboard:key|count[9]  ; keyboard:key|code[7]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.289 ns                ;
+; N/A                                     ; 176.65 MHz ( period = 5.661 ns )                    ; keyboard:key|count[6]  ; keyboard:key|count[1]        ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.461 ns                ;
+; N/A                                     ; 176.68 MHz ( period = 5.660 ns )                    ; keyboard:key|count[6]  ; keyboard:key|count[3]        ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.460 ns                ;
+; N/A                                     ; 176.68 MHz ( period = 5.660 ns )                    ; keyboard:key|count[6]  ; keyboard:key|count[0]        ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.460 ns                ;
+; N/A                                     ; 177.49 MHz ( period = 5.634 ns )                    ; keyboard:key|count[10] ; keyboard:key|code[0]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.258 ns                ;
+; N/A                                     ; 177.49 MHz ( period = 5.634 ns )                    ; keyboard:key|count[10] ; keyboard:key|code[6]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.258 ns                ;
+; N/A                                     ; 177.49 MHz ( period = 5.634 ns )                    ; keyboard:key|count[10] ; keyboard:key|code[7]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.258 ns                ;
+; N/A                                     ; 178.48 MHz ( period = 5.603 ns )                    ; keyboard:key|count[11] ; keyboard:key|previousCode[2] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.377 ns                ;
+; N/A                                     ; 178.48 MHz ( period = 5.603 ns )                    ; keyboard:key|count[11] ; keyboard:key|previousCode[3] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.377 ns                ;
+; N/A                                     ; 178.48 MHz ( period = 5.603 ns )                    ; keyboard:key|count[11] ; keyboard:key|previousCode[1] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.377 ns                ;
+; N/A                                     ; 178.48 MHz ( period = 5.603 ns )                    ; keyboard:key|count[11] ; keyboard:key|previousCode[4] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.377 ns                ;
+; N/A                                     ; 178.48 MHz ( period = 5.603 ns )                    ; keyboard:key|count[11] ; keyboard:key|previousCode[7] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.377 ns                ;
+; N/A                                     ; 178.48 MHz ( period = 5.603 ns )                    ; keyboard:key|count[11] ; keyboard:key|previousCode[5] ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.377 ns                ;
+; N/A                                     ; 178.57 MHz ( period = 5.600 ns )                    ; keyboard:key|count[11] ; keyboard:key|code[1]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.375 ns                ;
+; N/A                                     ; 178.57 MHz ( period = 5.600 ns )                    ; keyboard:key|count[11] ; keyboard:key|code[5]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.375 ns                ;
+; N/A                                     ; 178.57 MHz ( period = 5.600 ns )                    ; keyboard:key|count[11] ; keyboard:key|code[3]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.375 ns                ;
+; N/A                                     ; 178.57 MHz ( period = 5.600 ns )                    ; keyboard:key|count[11] ; keyboard:key|code[4]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.375 ns                ;
+; N/A                                     ; 178.57 MHz ( period = 5.600 ns )                    ; keyboard:key|count[11] ; keyboard:key|code[2]         ; kb_clk     ; kb_clk   ; None                        ; None                      ; 5.375 ns                ;
+; Timing analysis restricted to 200 rows. ; To change the limit use Settings (Assignments menu) ;                        ;                              ;            ;          ;                             ;                           ;                         ;
++-----------------------------------------+-----------------------------------------------------+------------------------+------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Hold: 'master_clk'                                                                                                                                                                                                           ;
++------------------------------------------+---------------------------+----------------------------------------------+------------+------------+----------------------------+----------------------------+--------------------------+
+; Minimum Slack                            ; From                      ; To                                           ; From Clock ; To Clock   ; Required Hold Relationship ; Required Shortest P2P Time ; Actual Shortest P2P Time ;
++------------------------------------------+---------------------------+----------------------------------------------+------------+------------+----------------------------+----------------------------+--------------------------+
+; Not operational: Clock Skew > Data Delay ; clk_divider_by2:divider|q ; clk_divider_by2:divider|VGA_clk              ; master_clk ; master_clk ; None                       ; None                       ; 2.054 ns                 ;
+; Not operational: Clock Skew > Data Delay ; clk_divider_by2:divider|q ; clk_divider_by2:divider|VGA_clk~_Duplicate_1 ; master_clk ; master_clk ; None                       ; None                       ; 0.682 ns                 ;
++------------------------------------------+---------------------------+----------------------------------------------+------------+------------+----------------------------+----------------------------+--------------------------+
+
+
++------------------------------------------------------------------------------------+
+; tsu                                                                                ;
++-------+--------------+------------+------+------------------------------+----------+
+; Slack ; Required tsu ; Actual tsu ; From ; To                           ; To Clock ;
++-------+--------------+------------+------+------------------------------+----------+
+; N/A   ; None         ; 4.877 ns   ; data ; keyboard:key|previousCode[7] ; kb_clk   ;
+; N/A   ; None         ; 4.854 ns   ; data ; keyboard:key|code[3]         ; kb_clk   ;
+; N/A   ; None         ; 4.853 ns   ; data ; keyboard:key|previousCode[3] ; kb_clk   ;
+; N/A   ; None         ; 4.780 ns   ; data ; keyboard:key|code[1]         ; kb_clk   ;
+; N/A   ; None         ; 4.692 ns   ; data ; keyboard:key|code[6]         ; kb_clk   ;
+; N/A   ; None         ; 4.633 ns   ; data ; keyboard:key|code[7]         ; kb_clk   ;
+; N/A   ; None         ; 4.573 ns   ; data ; keyboard:key|previousCode[5] ; kb_clk   ;
+; N/A   ; None         ; 4.569 ns   ; data ; keyboard:key|code[5]         ; kb_clk   ;
+; N/A   ; None         ; 4.551 ns   ; data ; keyboard:key|code[4]         ; kb_clk   ;
+; N/A   ; None         ; 4.479 ns   ; data ; keyboard:key|code[0]         ; kb_clk   ;
+; N/A   ; None         ; 4.424 ns   ; data ; keyboard:key|previousCode[1] ; kb_clk   ;
+; N/A   ; None         ; 4.401 ns   ; data ; keyboard:key|previousCode[4] ; kb_clk   ;
+; N/A   ; None         ; 4.332 ns   ; data ; keyboard:key|previousCode[0] ; kb_clk   ;
+; N/A   ; None         ; 4.284 ns   ; data ; keyboard:key|code[2]         ; kb_clk   ;
+; N/A   ; None         ; 4.282 ns   ; data ; keyboard:key|previousCode[2] ; kb_clk   ;
+; N/A   ; None         ; 4.192 ns   ; data ; keyboard:key|previousCode[6] ; kb_clk   ;
+; N/A   ; None         ; 3.591 ns   ; data ; keyboard:key|keyCode[4]      ; kb_clk   ;
+; N/A   ; None         ; 3.589 ns   ; data ; keyboard:key|keyCode[8]      ; kb_clk   ;
+; N/A   ; None         ; 3.288 ns   ; data ; keyboard:key|keyCode[6]      ; kb_clk   ;
+; N/A   ; None         ; 3.288 ns   ; data ; keyboard:key|keyCode[3]      ; kb_clk   ;
+; N/A   ; None         ; 3.286 ns   ; data ; keyboard:key|keyCode[7]      ; kb_clk   ;
+; N/A   ; None         ; 3.285 ns   ; data ; keyboard:key|keyCode[1]      ; kb_clk   ;
+; N/A   ; None         ; 3.285 ns   ; data ; keyboard:key|keyCode[5]      ; kb_clk   ;
+; N/A   ; None         ; 3.003 ns   ; data ; keyboard:key|keyCode[2]      ; kb_clk   ;
++-------+--------------+------------+------+------------------------------+----------+
+
+
++----------------------------------------------------------------------------------------------+
+; tco                                                                                          ;
++-------+--------------+------------+---------------------------------+-----------+------------+
+; Slack ; Required tco ; Actual tco ; From                            ; To        ; From Clock ;
++-------+--------------+------------+---------------------------------+-----------+------------+
+; N/A   ; None         ; 13.659 ns  ; VGA_R[4]~reg0                   ; VGA_R[4]  ; master_clk ;
+; N/A   ; None         ; 13.139 ns  ; vga:gen|p_hSync                 ; VGA_hSync ; master_clk ;
+; N/A   ; None         ; 12.756 ns  ; VGA_G[0]~reg0                   ; VGA_G[0]  ; master_clk ;
+; N/A   ; None         ; 12.731 ns  ; vga:gen|p_vSync                 ; VGA_vSync ; master_clk ;
+; N/A   ; None         ; 12.731 ns  ; VGA_G[2]~reg0                   ; VGA_G[2]  ; master_clk ;
+; N/A   ; None         ; 12.548 ns  ; vga:gen|displayArea             ; blank_n   ; master_clk ;
+; N/A   ; None         ; 12.509 ns  ; VGA_G[1]~reg0                   ; VGA_G[1]  ; master_clk ;
+; N/A   ; None         ; 12.498 ns  ; VGA_G[3]~reg0                   ; VGA_G[3]  ; master_clk ;
+; N/A   ; None         ; 12.393 ns  ; VGA_R[9]~reg0                   ; VGA_R[9]  ; master_clk ;
+; N/A   ; None         ; 12.288 ns  ; VGA_G[5]~reg0                   ; VGA_G[5]  ; master_clk ;
+; N/A   ; None         ; 12.275 ns  ; VGA_G[4]~reg0                   ; VGA_G[4]  ; master_clk ;
+; N/A   ; None         ; 12.043 ns  ; VGA_B[4]~reg0                   ; VGA_B[4]  ; master_clk ;
+; N/A   ; None         ; 12.030 ns  ; VGA_R[7]~reg0                   ; VGA_R[7]  ; master_clk ;
+; N/A   ; None         ; 12.015 ns  ; VGA_G[7]~reg0                   ; VGA_G[7]  ; master_clk ;
+; N/A   ; None         ; 12.015 ns  ; VGA_G[6]~reg0                   ; VGA_G[6]  ; master_clk ;
+; N/A   ; None         ; 11.815 ns  ; VGA_R[1]~reg0                   ; VGA_R[1]  ; master_clk ;
+; N/A   ; None         ; 11.812 ns  ; VGA_B[2]~reg0                   ; VGA_B[2]  ; master_clk ;
+; N/A   ; None         ; 11.811 ns  ; VGA_R[5]~reg0                   ; VGA_R[5]  ; master_clk ;
+; N/A   ; None         ; 11.809 ns  ; VGA_B[3]~reg0                   ; VGA_B[3]  ; master_clk ;
+; N/A   ; None         ; 11.572 ns  ; VGA_R[3]~reg0                   ; VGA_R[3]  ; master_clk ;
+; N/A   ; None         ; 11.570 ns  ; VGA_B[8]~reg0                   ; VGA_B[8]  ; master_clk ;
+; N/A   ; None         ; 11.561 ns  ; VGA_R[2]~reg0                   ; VGA_R[2]  ; master_clk ;
+; N/A   ; None         ; 11.522 ns  ; VGA_G[8]~reg0                   ; VGA_G[8]  ; master_clk ;
+; N/A   ; None         ; 11.374 ns  ; VGA_B[7]~reg0                   ; VGA_B[7]  ; master_clk ;
+; N/A   ; None         ; 11.373 ns  ; VGA_R[8]~reg0                   ; VGA_R[8]  ; master_clk ;
+; N/A   ; None         ; 11.371 ns  ; VGA_B[6]~reg0                   ; VGA_B[6]  ; master_clk ;
+; N/A   ; None         ; 11.364 ns  ; VGA_R[0]~reg0                   ; VGA_R[0]  ; master_clk ;
+; N/A   ; None         ; 11.363 ns  ; VGA_B[5]~reg0                   ; VGA_B[5]  ; master_clk ;
+; N/A   ; None         ; 11.329 ns  ; VGA_B[0]~reg0                   ; VGA_B[0]  ; master_clk ;
+; N/A   ; None         ; 11.325 ns  ; VGA_B[1]~reg0                   ; VGA_B[1]  ; master_clk ;
+; N/A   ; None         ; 11.323 ns  ; VGA_R[6]~reg0                   ; VGA_R[6]  ; master_clk ;
+; N/A   ; None         ; 11.319 ns  ; VGA_B[9]~reg0                   ; VGA_B[9]  ; master_clk ;
+; N/A   ; None         ; 11.298 ns  ; VGA_G[9]~reg0                   ; VGA_G[9]  ; master_clk ;
+; N/A   ; None         ; 10.103 ns  ; clk_divider_by2:divider|VGA_clk ; DAC_clk   ; master_clk ;
++-------+--------------+------------+---------------------------------+-----------+------------+
+
+
++------------------------------------------------------------------------------------------+
+; th                                                                                       ;
++---------------+-------------+-----------+------+------------------------------+----------+
+; Minimum Slack ; Required th ; Actual th ; From ; To                           ; To Clock ;
++---------------+-------------+-----------+------+------------------------------+----------+
+; N/A           ; None        ; -2.773 ns ; data ; keyboard:key|keyCode[2]      ; kb_clk   ;
+; N/A           ; None        ; -3.055 ns ; data ; keyboard:key|keyCode[1]      ; kb_clk   ;
+; N/A           ; None        ; -3.055 ns ; data ; keyboard:key|keyCode[5]      ; kb_clk   ;
+; N/A           ; None        ; -3.056 ns ; data ; keyboard:key|keyCode[7]      ; kb_clk   ;
+; N/A           ; None        ; -3.058 ns ; data ; keyboard:key|keyCode[6]      ; kb_clk   ;
+; N/A           ; None        ; -3.058 ns ; data ; keyboard:key|keyCode[3]      ; kb_clk   ;
+; N/A           ; None        ; -3.359 ns ; data ; keyboard:key|keyCode[8]      ; kb_clk   ;
+; N/A           ; None        ; -3.361 ns ; data ; keyboard:key|keyCode[4]      ; kb_clk   ;
+; N/A           ; None        ; -3.962 ns ; data ; keyboard:key|previousCode[6] ; kb_clk   ;
+; N/A           ; None        ; -4.052 ns ; data ; keyboard:key|previousCode[2] ; kb_clk   ;
+; N/A           ; None        ; -4.054 ns ; data ; keyboard:key|code[2]         ; kb_clk   ;
+; N/A           ; None        ; -4.102 ns ; data ; keyboard:key|previousCode[0] ; kb_clk   ;
+; N/A           ; None        ; -4.171 ns ; data ; keyboard:key|previousCode[4] ; kb_clk   ;
+; N/A           ; None        ; -4.194 ns ; data ; keyboard:key|previousCode[1] ; kb_clk   ;
+; N/A           ; None        ; -4.249 ns ; data ; keyboard:key|code[0]         ; kb_clk   ;
+; N/A           ; None        ; -4.321 ns ; data ; keyboard:key|code[4]         ; kb_clk   ;
+; N/A           ; None        ; -4.339 ns ; data ; keyboard:key|code[5]         ; kb_clk   ;
+; N/A           ; None        ; -4.343 ns ; data ; keyboard:key|previousCode[5] ; kb_clk   ;
+; N/A           ; None        ; -4.403 ns ; data ; keyboard:key|code[7]         ; kb_clk   ;
+; N/A           ; None        ; -4.462 ns ; data ; keyboard:key|code[6]         ; kb_clk   ;
+; N/A           ; None        ; -4.550 ns ; data ; keyboard:key|code[1]         ; kb_clk   ;
+; N/A           ; None        ; -4.623 ns ; data ; keyboard:key|previousCode[3] ; kb_clk   ;
+; N/A           ; None        ; -4.624 ns ; data ; keyboard:key|code[3]         ; kb_clk   ;
+; N/A           ; None        ; -4.647 ns ; data ; keyboard:key|previousCode[7] ; kb_clk   ;
++---------------+-------------+-----------+------+------------------------------+----------+
+
+
++--------------------------+
+; Timing Analyzer Messages ;
++--------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Classic Timing Analyzer
+    Info: Version 9.0 Build 235 06/17/2009 Service Pack 2 SJ Web Edition
+    Info: Processing started: Wed Nov 23 17:50:32 2016
+Info: Command: quartus_tan --read_settings_files=off --write_settings_files=off AGHnoid -c AGHnoid --timing_analysis_only
+Warning: Timing Analysis is analyzing one or more combinational loops as latches
+    Warning: Node "keyboard:key|direction[0]" is a latch
+Warning: Found pins functioning as undefined clocks and/or memory enables
+    Info: Assuming node "master_clk" is an undefined clock
+    Info: Assuming node "kb_clk" is an undefined clock
+Warning: Found 2 node(s) in clock paths which may be acting as ripple and/or gated clocks -- node(s) analyzed as buffer(s) resulting in clock skew
+    Info: Detected ripple clock "clk_divider_by2:divider|VGA_clk~_Duplicate_1" as buffer
+    Info: Detected ripple clock "update_clk:updater|update" as buffer
+Info: Clock "master_clk" has Internal fmax of 138.87 MHz between source register "rocket_x_pos[5]" and destination register "rocket_x_pos[0]" (period= 7.201 ns)
+    Info: + Longest register to register delay is 6.994 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X60_Y34_N11; Fanout = 6; REG Node = 'rocket_x_pos[5]'
+        Info: 2: + IC(0.526 ns) + CELL(0.414 ns) = 0.940 ns; Loc. = LCCOMB_X61_Y34_N6; Fanout = 2; COMB Node = 'Add0~3'
+        Info: 3: + IC(0.000 ns) + CELL(0.071 ns) = 1.011 ns; Loc. = LCCOMB_X61_Y34_N8; Fanout = 2; COMB Node = 'Add0~5'
+        Info: 4: + IC(0.000 ns) + CELL(0.071 ns) = 1.082 ns; Loc. = LCCOMB_X61_Y34_N10; Fanout = 2; COMB Node = 'Add0~7'
+        Info: 5: + IC(0.000 ns) + CELL(0.071 ns) = 1.153 ns; Loc. = LCCOMB_X61_Y34_N12; Fanout = 2; COMB Node = 'Add0~9'
+        Info: 6: + IC(0.000 ns) + CELL(0.159 ns) = 1.312 ns; Loc. = LCCOMB_X61_Y34_N14; Fanout = 2; COMB Node = 'Add0~11'
+        Info: 7: + IC(0.000 ns) + CELL(0.071 ns) = 1.383 ns; Loc. = LCCOMB_X61_Y34_N16; Fanout = 2; COMB Node = 'Add0~13'
+        Info: 8: + IC(0.000 ns) + CELL(0.071 ns) = 1.454 ns; Loc. = LCCOMB_X61_Y34_N18; Fanout = 2; COMB Node = 'Add0~15'
+        Info: 9: + IC(0.000 ns) + CELL(0.071 ns) = 1.525 ns; Loc. = LCCOMB_X61_Y34_N20; Fanout = 2; COMB Node = 'Add0~17'
+        Info: 10: + IC(0.000 ns) + CELL(0.071 ns) = 1.596 ns; Loc. = LCCOMB_X61_Y34_N22; Fanout = 2; COMB Node = 'Add0~19'
+        Info: 11: + IC(0.000 ns) + CELL(0.071 ns) = 1.667 ns; Loc. = LCCOMB_X61_Y34_N24; Fanout = 2; COMB Node = 'Add0~21'
+        Info: 12: + IC(0.000 ns) + CELL(0.071 ns) = 1.738 ns; Loc. = LCCOMB_X61_Y34_N26; Fanout = 2; COMB Node = 'Add0~23'
+        Info: 13: + IC(0.000 ns) + CELL(0.071 ns) = 1.809 ns; Loc. = LCCOMB_X61_Y34_N28; Fanout = 2; COMB Node = 'Add0~25'
+        Info: 14: + IC(0.000 ns) + CELL(0.146 ns) = 1.955 ns; Loc. = LCCOMB_X61_Y34_N30; Fanout = 2; COMB Node = 'Add0~27'
+        Info: 15: + IC(0.000 ns) + CELL(0.071 ns) = 2.026 ns; Loc. = LCCOMB_X61_Y33_N0; Fanout = 2; COMB Node = 'Add0~29'
+        Info: 16: + IC(0.000 ns) + CELL(0.071 ns) = 2.097 ns; Loc. = LCCOMB_X61_Y33_N2; Fanout = 2; COMB Node = 'Add0~31'
+        Info: 17: + IC(0.000 ns) + CELL(0.071 ns) = 2.168 ns; Loc. = LCCOMB_X61_Y33_N4; Fanout = 2; COMB Node = 'Add0~33'
+        Info: 18: + IC(0.000 ns) + CELL(0.071 ns) = 2.239 ns; Loc. = LCCOMB_X61_Y33_N6; Fanout = 2; COMB Node = 'Add0~35'
+        Info: 19: + IC(0.000 ns) + CELL(0.071 ns) = 2.310 ns; Loc. = LCCOMB_X61_Y33_N8; Fanout = 2; COMB Node = 'Add0~37'
+        Info: 20: + IC(0.000 ns) + CELL(0.071 ns) = 2.381 ns; Loc. = LCCOMB_X61_Y33_N10; Fanout = 2; COMB Node = 'Add0~39'
+        Info: 21: + IC(0.000 ns) + CELL(0.410 ns) = 2.791 ns; Loc. = LCCOMB_X61_Y33_N12; Fanout = 1; COMB Node = 'Add0~40'
+        Info: 22: + IC(0.686 ns) + CELL(0.398 ns) = 3.875 ns; Loc. = LCCOMB_X62_Y34_N18; Fanout = 1; COMB Node = 'rocket_x_pos[31]~34'
+        Info: 23: + IC(0.687 ns) + CELL(0.150 ns) = 4.712 ns; Loc. = LCCOMB_X61_Y33_N30; Fanout = 2; COMB Node = 'rocket_x_pos[31]~38'
+        Info: 24: + IC(0.753 ns) + CELL(0.150 ns) = 5.615 ns; Loc. = LCCOMB_X60_Y34_N0; Fanout = 32; COMB Node = 'rocket_x_pos[31]~41'
+        Info: 25: + IC(0.719 ns) + CELL(0.660 ns) = 6.994 ns; Loc. = LCFF_X59_Y33_N1; Fanout = 6; REG Node = 'rocket_x_pos[0]'
+        Info: Total cell delay = 3.623 ns ( 51.80 % )
+        Info: Total interconnect delay = 3.371 ns ( 48.20 % )
+    Info: - Smallest clock skew is 0.007 ns
+        Info: + Shortest clock path from clock "master_clk" to destination register is 7.656 ns
+            Info: 1: + IC(0.000 ns) + CELL(0.959 ns) = 0.959 ns; Loc. = PIN_AD15; Fanout = 4; CLK Node = 'master_clk'
+            Info: 2: + IC(2.066 ns) + CELL(0.787 ns) = 3.812 ns; Loc. = LCFF_X81_Y14_N21; Fanout = 2; REG Node = 'update_clk:updater|update'
+            Info: 3: + IC(2.093 ns) + CELL(0.000 ns) = 5.905 ns; Loc. = CLKCTRL_G7; Fanout = 32; COMB Node = 'update_clk:updater|update~clkctrl'
+            Info: 4: + IC(1.214 ns) + CELL(0.537 ns) = 7.656 ns; Loc. = LCFF_X59_Y33_N1; Fanout = 6; REG Node = 'rocket_x_pos[0]'
+            Info: Total cell delay = 2.283 ns ( 29.82 % )
+            Info: Total interconnect delay = 5.373 ns ( 70.18 % )
+        Info: - Longest clock path from clock "master_clk" to source register is 7.649 ns
+            Info: 1: + IC(0.000 ns) + CELL(0.959 ns) = 0.959 ns; Loc. = PIN_AD15; Fanout = 4; CLK Node = 'master_clk'
+            Info: 2: + IC(2.066 ns) + CELL(0.787 ns) = 3.812 ns; Loc. = LCFF_X81_Y14_N21; Fanout = 2; REG Node = 'update_clk:updater|update'
+            Info: 3: + IC(2.093 ns) + CELL(0.000 ns) = 5.905 ns; Loc. = CLKCTRL_G7; Fanout = 32; COMB Node = 'update_clk:updater|update~clkctrl'
+            Info: 4: + IC(1.207 ns) + CELL(0.537 ns) = 7.649 ns; Loc. = LCFF_X60_Y34_N11; Fanout = 6; REG Node = 'rocket_x_pos[5]'
+            Info: Total cell delay = 2.283 ns ( 29.85 % )
+            Info: Total interconnect delay = 5.366 ns ( 70.15 % )
+    Info: + Micro clock to output delay of source is 0.250 ns
+    Info: + Micro setup delay of destination is -0.036 ns
+Info: Clock "kb_clk" has Internal fmax of 149.88 MHz between source register "keyboard:key|count[0]" and destination register "keyboard:key|previousCode[2]" (period= 6.672 ns)
+    Info: + Longest register to register delay is 6.432 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X72_Y50_N21; Fanout = 7; REG Node = 'keyboard:key|count[0]'
+        Info: 2: + IC(0.493 ns) + CELL(0.393 ns) = 0.886 ns; Loc. = LCCOMB_X71_Y50_N0; Fanout = 2; COMB Node = 'keyboard:key|Add0~1'
+        Info: 3: + IC(0.000 ns) + CELL(0.071 ns) = 0.957 ns; Loc. = LCCOMB_X71_Y50_N2; Fanout = 2; COMB Node = 'keyboard:key|Add0~3'
+        Info: 4: + IC(0.000 ns) + CELL(0.071 ns) = 1.028 ns; Loc. = LCCOMB_X71_Y50_N4; Fanout = 2; COMB Node = 'keyboard:key|Add0~5'
+        Info: 5: + IC(0.000 ns) + CELL(0.071 ns) = 1.099 ns; Loc. = LCCOMB_X71_Y50_N6; Fanout = 2; COMB Node = 'keyboard:key|Add0~7'
+        Info: 6: + IC(0.000 ns) + CELL(0.071 ns) = 1.170 ns; Loc. = LCCOMB_X71_Y50_N8; Fanout = 2; COMB Node = 'keyboard:key|Add0~9'
+        Info: 7: + IC(0.000 ns) + CELL(0.071 ns) = 1.241 ns; Loc. = LCCOMB_X71_Y50_N10; Fanout = 2; COMB Node = 'keyboard:key|Add0~11'
+        Info: 8: + IC(0.000 ns) + CELL(0.071 ns) = 1.312 ns; Loc. = LCCOMB_X71_Y50_N12; Fanout = 2; COMB Node = 'keyboard:key|Add0~13'
+        Info: 9: + IC(0.000 ns) + CELL(0.159 ns) = 1.471 ns; Loc. = LCCOMB_X71_Y50_N14; Fanout = 2; COMB Node = 'keyboard:key|Add0~15'
+        Info: 10: + IC(0.000 ns) + CELL(0.071 ns) = 1.542 ns; Loc. = LCCOMB_X71_Y50_N16; Fanout = 2; COMB Node = 'keyboard:key|Add0~17'
+        Info: 11: + IC(0.000 ns) + CELL(0.071 ns) = 1.613 ns; Loc. = LCCOMB_X71_Y50_N18; Fanout = 2; COMB Node = 'keyboard:key|Add0~19'
+        Info: 12: + IC(0.000 ns) + CELL(0.071 ns) = 1.684 ns; Loc. = LCCOMB_X71_Y50_N20; Fanout = 2; COMB Node = 'keyboard:key|Add0~21'
+        Info: 13: + IC(0.000 ns) + CELL(0.071 ns) = 1.755 ns; Loc. = LCCOMB_X71_Y50_N22; Fanout = 2; COMB Node = 'keyboard:key|Add0~23'
+        Info: 14: + IC(0.000 ns) + CELL(0.071 ns) = 1.826 ns; Loc. = LCCOMB_X71_Y50_N24; Fanout = 2; COMB Node = 'keyboard:key|Add0~25'
+        Info: 15: + IC(0.000 ns) + CELL(0.071 ns) = 1.897 ns; Loc. = LCCOMB_X71_Y50_N26; Fanout = 2; COMB Node = 'keyboard:key|Add0~27'
+        Info: 16: + IC(0.000 ns) + CELL(0.071 ns) = 1.968 ns; Loc. = LCCOMB_X71_Y50_N28; Fanout = 2; COMB Node = 'keyboard:key|Add0~29'
+        Info: 17: + IC(0.000 ns) + CELL(0.146 ns) = 2.114 ns; Loc. = LCCOMB_X71_Y50_N30; Fanout = 2; COMB Node = 'keyboard:key|Add0~31'
+        Info: 18: + IC(0.000 ns) + CELL(0.071 ns) = 2.185 ns; Loc. = LCCOMB_X71_Y49_N0; Fanout = 2; COMB Node = 'keyboard:key|Add0~33'
+        Info: 19: + IC(0.000 ns) + CELL(0.071 ns) = 2.256 ns; Loc. = LCCOMB_X71_Y49_N2; Fanout = 2; COMB Node = 'keyboard:key|Add0~35'
+        Info: 20: + IC(0.000 ns) + CELL(0.071 ns) = 2.327 ns; Loc. = LCCOMB_X71_Y49_N4; Fanout = 2; COMB Node = 'keyboard:key|Add0~37'
+        Info: 21: + IC(0.000 ns) + CELL(0.071 ns) = 2.398 ns; Loc. = LCCOMB_X71_Y49_N6; Fanout = 2; COMB Node = 'keyboard:key|Add0~39'
+        Info: 22: + IC(0.000 ns) + CELL(0.071 ns) = 2.469 ns; Loc. = LCCOMB_X71_Y49_N8; Fanout = 2; COMB Node = 'keyboard:key|Add0~41'
+        Info: 23: + IC(0.000 ns) + CELL(0.071 ns) = 2.540 ns; Loc. = LCCOMB_X71_Y49_N10; Fanout = 2; COMB Node = 'keyboard:key|Add0~43'
+        Info: 24: + IC(0.000 ns) + CELL(0.071 ns) = 2.611 ns; Loc. = LCCOMB_X71_Y49_N12; Fanout = 2; COMB Node = 'keyboard:key|Add0~45'
+        Info: 25: + IC(0.000 ns) + CELL(0.159 ns) = 2.770 ns; Loc. = LCCOMB_X71_Y49_N14; Fanout = 2; COMB Node = 'keyboard:key|Add0~47'
+        Info: 26: + IC(0.000 ns) + CELL(0.071 ns) = 2.841 ns; Loc. = LCCOMB_X71_Y49_N16; Fanout = 2; COMB Node = 'keyboard:key|Add0~49'
+        Info: 27: + IC(0.000 ns) + CELL(0.071 ns) = 2.912 ns; Loc. = LCCOMB_X71_Y49_N18; Fanout = 2; COMB Node = 'keyboard:key|Add0~51'
+        Info: 28: + IC(0.000 ns) + CELL(0.410 ns) = 3.322 ns; Loc. = LCCOMB_X71_Y49_N20; Fanout = 2; COMB Node = 'keyboard:key|Add0~52'
+        Info: 29: + IC(0.669 ns) + CELL(0.275 ns) = 4.266 ns; Loc. = LCCOMB_X70_Y49_N8; Fanout = 3; COMB Node = 'keyboard:key|Equal0~3'
+        Info: 30: + IC(0.698 ns) + CELL(0.150 ns) = 5.114 ns; Loc. = LCCOMB_X72_Y49_N28; Fanout = 8; COMB Node = 'keyboard:key|Equal0~10'
+        Info: 31: + IC(0.658 ns) + CELL(0.660 ns) = 6.432 ns; Loc. = LCFF_X74_Y49_N13; Fanout = 1; REG Node = 'keyboard:key|previousCode[2]'
+        Info: Total cell delay = 3.914 ns ( 60.85 % )
+        Info: Total interconnect delay = 2.518 ns ( 39.15 % )
+    Info: - Smallest clock skew is -0.026 ns
+        Info: + Shortest clock path from clock "kb_clk" to destination register is 3.276 ns
+            Info: 1: + IC(0.000 ns) + CELL(0.830 ns) = 0.830 ns; Loc. = PIN_F24; Fanout = 56; CLK Node = 'kb_clk'
+            Info: 2: + IC(1.909 ns) + CELL(0.537 ns) = 3.276 ns; Loc. = LCFF_X74_Y49_N13; Fanout = 1; REG Node = 'keyboard:key|previousCode[2]'
+            Info: Total cell delay = 1.367 ns ( 41.73 % )
+            Info: Total interconnect delay = 1.909 ns ( 58.27 % )
+        Info: - Longest clock path from clock "kb_clk" to source register is 3.302 ns
+            Info: 1: + IC(0.000 ns) + CELL(0.830 ns) = 0.830 ns; Loc. = PIN_F24; Fanout = 56; CLK Node = 'kb_clk'
+            Info: 2: + IC(1.935 ns) + CELL(0.537 ns) = 3.302 ns; Loc. = LCFF_X72_Y50_N21; Fanout = 7; REG Node = 'keyboard:key|count[0]'
+            Info: Total cell delay = 1.367 ns ( 41.40 % )
+            Info: Total interconnect delay = 1.935 ns ( 58.60 % )
+    Info: + Micro clock to output delay of source is 0.250 ns
+    Info: + Micro setup delay of destination is -0.036 ns
+Warning: Circuit may not operate. Detected 2 non-operational path(s) clocked by clock "master_clk" with clock skew larger than data delay. See Compilation Report for details.
+Info: Found hold time violation between source  pin or register "clk_divider_by2:divider|q" and destination pin or register "clk_divider_by2:divider|VGA_clk" for clock "master_clk" (Hold time is 2.395 ns)
+    Info: + Largest clock skew is 4.596 ns
+        Info: + Longest clock path from clock "master_clk" to destination register is 7.408 ns
+            Info: 1: + IC(0.000 ns) + CELL(0.959 ns) = 0.959 ns; Loc. = PIN_AD15; Fanout = 4; CLK Node = 'master_clk'
+            Info: 2: + IC(6.152 ns) + CELL(0.297 ns) = 7.408 ns; Loc. = IOC_X82_Y51_N2; Fanout = 1; REG Node = 'clk_divider_by2:divider|VGA_clk'
+            Info: Total cell delay = 1.256 ns ( 16.95 % )
+            Info: Total interconnect delay = 6.152 ns ( 83.05 % )
+        Info: - Shortest clock path from clock "master_clk" to source register is 2.812 ns
+            Info: 1: + IC(0.000 ns) + CELL(0.959 ns) = 0.959 ns; Loc. = PIN_AD15; Fanout = 4; CLK Node = 'master_clk'
+            Info: 2: + IC(0.112 ns) + CELL(0.000 ns) = 1.071 ns; Loc. = CLKCTRL_G14; Fanout = 22; COMB Node = 'master_clk~clkctrl'
+            Info: 3: + IC(1.204 ns) + CELL(0.537 ns) = 2.812 ns; Loc. = LCFF_X83_Y18_N21; Fanout = 6; REG Node = 'clk_divider_by2:divider|q'
+            Info: Total cell delay = 1.496 ns ( 53.20 % )
+            Info: Total interconnect delay = 1.316 ns ( 46.80 % )
+    Info: - Micro clock to output delay of source is 0.250 ns
+    Info: - Shortest register to register delay is 2.054 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X83_Y18_N21; Fanout = 6; REG Node = 'clk_divider_by2:divider|q'
+        Info: 2: + IC(1.775 ns) + CELL(0.279 ns) = 2.054 ns; Loc. = IOC_X82_Y51_N2; Fanout = 1; REG Node = 'clk_divider_by2:divider|VGA_clk'
+        Info: Total cell delay = 0.279 ns ( 13.58 % )
+        Info: Total interconnect delay = 1.775 ns ( 86.42 % )
+    Info: + Micro hold delay of destination is 0.103 ns
+Info: tsu for register "keyboard:key|previousCode[7]" (data pin = "data", clock pin = "kb_clk") is 4.877 ns
+    Info: + Longest pin to register delay is 8.189 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.830 ns) = 0.830 ns; Loc. = PIN_E24; Fanout = 8; PIN Node = 'data'
+        Info: 2: + IC(5.575 ns) + CELL(0.438 ns) = 6.843 ns; Loc. = LCCOMB_X72_Y50_N12; Fanout = 3; COMB Node = 'keyboard:key|keyCode~9'
+        Info: 3: + IC(0.980 ns) + CELL(0.366 ns) = 8.189 ns; Loc. = LCFF_X74_Y49_N29; Fanout = 1; REG Node = 'keyboard:key|previousCode[7]'
+        Info: Total cell delay = 1.634 ns ( 19.95 % )
+        Info: Total interconnect delay = 6.555 ns ( 80.05 % )
+    Info: + Micro setup delay of destination is -0.036 ns
+    Info: - Shortest clock path from clock "kb_clk" to destination register is 3.276 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.830 ns) = 0.830 ns; Loc. = PIN_F24; Fanout = 56; CLK Node = 'kb_clk'
+        Info: 2: + IC(1.909 ns) + CELL(0.537 ns) = 3.276 ns; Loc. = LCFF_X74_Y49_N29; Fanout = 1; REG Node = 'keyboard:key|previousCode[7]'
+        Info: Total cell delay = 1.367 ns ( 41.73 % )
+        Info: Total interconnect delay = 1.909 ns ( 58.27 % )
+Info: tco from clock "master_clk" to destination pin "VGA_R[4]" through register "VGA_R[4]~reg0" is 13.659 ns
+    Info: + Longest clock path from clock "master_clk" to source register is 7.663 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.959 ns) = 0.959 ns; Loc. = PIN_AD15; Fanout = 4; CLK Node = 'master_clk'
+        Info: 2: + IC(2.033 ns) + CELL(0.787 ns) = 3.779 ns; Loc. = LCFF_X83_Y18_N1; Fanout = 1; REG Node = 'clk_divider_by2:divider|VGA_clk~_Duplicate_1'
+        Info: 3: + IC(2.095 ns) + CELL(0.000 ns) = 5.874 ns; Loc. = CLKCTRL_G4; Fanout = 55; COMB Node = 'clk_divider_by2:divider|VGA_clk~clkctrl'
+        Info: 4: + IC(1.252 ns) + CELL(0.537 ns) = 7.663 ns; Loc. = LCFF_X50_Y50_N25; Fanout = 1; REG Node = 'VGA_R[4]~reg0'
+        Info: Total cell delay = 2.283 ns ( 29.79 % )
+        Info: Total interconnect delay = 5.380 ns ( 70.21 % )
+    Info: + Micro clock to output delay of source is 0.250 ns
+    Info: + Longest register to pin delay is 5.746 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X50_Y50_N25; Fanout = 1; REG Node = 'VGA_R[4]~reg0'
+        Info: 2: + IC(2.988 ns) + CELL(2.758 ns) = 5.746 ns; Loc. = PIN_H21; Fanout = 0; PIN Node = 'VGA_R[4]'
+        Info: Total cell delay = 2.758 ns ( 48.00 % )
+        Info: Total interconnect delay = 2.988 ns ( 52.00 % )
+Info: th for register "keyboard:key|keyCode[2]" (data pin = "data", clock pin = "kb_clk") is -2.773 ns
+    Info: + Longest clock path from clock "kb_clk" to destination register is 3.143 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.830 ns) = 0.830 ns; Loc. = PIN_F24; Fanout = 56; CLK Node = 'kb_clk'
+        Info: 2: + IC(1.776 ns) + CELL(0.537 ns) = 3.143 ns; Loc. = LCFF_X92_Y50_N9; Fanout = 1; REG Node = 'keyboard:key|keyCode[2]'
+        Info: Total cell delay = 1.367 ns ( 43.49 % )
+        Info: Total interconnect delay = 1.776 ns ( 56.51 % )
+    Info: + Micro hold delay of destination is 0.266 ns
+    Info: - Shortest pin to register delay is 6.182 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.830 ns) = 0.830 ns; Loc. = PIN_E24; Fanout = 8; PIN Node = 'data'
+        Info: 2: + IC(4.830 ns) + CELL(0.438 ns) = 6.098 ns; Loc. = LCCOMB_X92_Y50_N8; Fanout = 3; COMB Node = 'keyboard:key|keyCode~15'
+        Info: 3: + IC(0.000 ns) + CELL(0.084 ns) = 6.182 ns; Loc. = LCFF_X92_Y50_N9; Fanout = 1; REG Node = 'keyboard:key|keyCode[2]'
+        Info: Total cell delay = 1.352 ns ( 21.87 % )
+        Info: Total interconnect delay = 4.830 ns ( 78.13 % )
+Info: Quartus II Classic Timing Analyzer was successful. 0 errors, 5 warnings
+    Info: Peak virtual memory: 201 megabytes
+    Info: Processing ended: Wed Nov 23 17:50:32 2016
+    Info: Elapsed time: 00:00:00
+    Info: Total CPU time (on all processors): 00:00:00
+
+

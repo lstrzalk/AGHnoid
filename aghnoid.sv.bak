@@ -1,0 +1,381 @@
+/* TODO:
+	- naprawic bricks_mask (zamienic na int, zrobic inicjalizacje 0, porownywac 0 lub 1)
+	- wyswietlanie rakietki i cegielek
+*/
+
+`include "clk_divider_by2.sv"
+`include "oneshot.sv"
+`include "keyboard.sv"
+`include "vga.sv"
+`include "game_status.sv"
+
+module aghnoid(master_clk, kb_clk, data, DAC_clk, VGA_R, VGA_G, VGA_B, VGA_hSync, VGA_vSync, blank_n, dispS1, dispS2, dispS3, dispS4, dispS5, dispS6, dispS7);
+	input master_clk, kb_clk, data; 					// 50MHz
+
+	/***************/
+	/*** OUTPUTS ***/
+	/***************/
+	output logic [9:0] VGA_R, VGA_G, VGA_B;  			// Red, Green, Blue VGA signals
+	output VGA_hSync, VGA_vSync, DAC_clk, blank_n; 		// Horizontal and Vertical sync signals
+	output logic [6:0] dispS1;	// key pressed
+	output logic [6:0] dispS2;	// L (lifes)
+	output logic [6:0] dispS3;	// lifes remaining
+	output logic [6:0] dispS4;	// P (points)
+	output logic [6:0] dispS5;	// hundreds
+	output logic [6:0] dispS6;	// dozens
+	output logic [6:0] dispS7;	// units
+
+	/*************/
+	/*** WIRES ***/
+	/*************/
+	wire [9:0] xCount; // x pixel
+	wire [9:0] yCount; // y pixel
+	wire displayArea; 	//is it in the active display area?
+	wire VGA_clk; 		//25 MHz	
+	wire R;
+	wire G;
+	wire B;
+	wire [7:0] scan_code;
+	wire reading_available, scan_ready;
+	wire update;
+
+	/*********************/
+	/*** GAME ELEMENTS ***/
+	/*********************/
+
+	// State
+	parameter bksp = 8'h66;			// backspace key = game reset
+	parameter enter = 8'h5A;		// enter = start game
+	parameter brake_code = 8'hF0;	// key's released signal
+	parameter key_d = 8'h23;		// key d = right -> 
+	parameter key_a = 8'h1C;		// key a = left <-
+	parameter key_p = 8'h4D;		// key p = pause game
+	//logic start = 1;				
+	//logic reset = 0;	
+	//logic pause = 0;				
+
+	// Window //
+	parameter window_width = 640;
+	parameter window_height = 480;
+
+	// Border //
+	logic border;
+	parameter border_width = 10;
+
+	// Rocket //
+	logic rocket;
+	parameter rocket_width = 80, rocket_height = 10;
+	parameter rocket_x_min_pos = border_width+1;							// 11
+	parameter rocket_x_max_pos = window_width - (border_width+1);			// 629
+	int rocket_x_pos = (window_width/2) - (rocket_width/2);					// 280
+	int rocket_y_pos = window_height - (2*border_width + rocket_height);	// 450
+	
+	// Ball //
+	logic ball;
+	parameter ball_radius = 7;
+	int ball_pos_x = window_width/2;	// 320
+	int ball_pos_y = 450 - ball_radius;	// 443
+	int ball_pos_x_direction = 1;
+	int ball_pos_y_direction = 1;
+	
+	// Bricks //
+	parameter bricks_columns = 2;
+	parameter bricks_rows = 2;
+	parameter brick_width = 28;
+	parameter brick_height = 15;
+	parameter brick_break = 2;
+	logic [bricks_columns-1:0][bricks_rows-1:0] bricks;
+	bit [bricks_columns-1:0][bricks_rows-1:0] bricks_mask; // 0 -> active | 1 -> inactive
+	int bricks_pos_x[bricks_columns][bricks_rows];
+	int bricks_pos_y[bricks_columns][bricks_rows];
+
+	// Game Status //
+	int lifes = 3;
+	int points = 0;
+	
+	/***************/
+	/*** MODULES ***/
+	/***************/
+
+	clk_divider_by2 divider(master_clk, VGA_clk); 									// Divide 50MHz clock by 2 to 25MHz
+	vga gen(VGA_clk, xCount, yCount, displayArea, VGA_hSync, VGA_vSync, blank_n);	// Generates xCount, yCount and horizontal/vertical sync signals	
+	oneshot pulser(reading_available, scan_ready, master_clk);
+	keyboard keyboard_handler(kb_clk, data, VGA_clk, reading_available, scan_ready, scan_code);
+	update_clk updater(master_clk, update);
+
+	dek7segBase dek7_dispS1(
+		.data_in(scan_code), 
+		.seg(dispS1)
+	);	// key pressed
+
+	dek7segBase dek7_dispS2(
+		.data_in(8'h4B), 
+		.seg(dispS2)
+	);	// L (lifes)
+
+	dek7segBase dek7_dispS4(
+		.data_in(8'h4D), 
+		.seg(dispS4)
+	);	// P (points)
+
+	game_status status(lifes, points, dispS3, dispS5, dispS6, dispS7);
+
+	/***************/
+	/*** ASSIGNS ***/
+	/***************/
+
+	assign DAC_clk = VGA_clk;
+	assign R = (displayArea && border);
+	assign G = (displayArea && ball);
+	assign B = (displayArea && (bricks || rocket));
+
+	/* DLA 6 WIERSZY
+	assign R = (displayArea && (bricks[0] || bricks[1] || bricks[2] || bricks[4] || border));
+	assign G = (displayArea && (bricks[0] || bricks[2] || bricks[5] || ball ));
+	assign B = (displayArea && (bricks[0] || bricks[3] || bricks[4] || rocket));
+	*/
+	
+	initial
+	begin
+		reg [4:0] a ;
+		$display("Value a: %h", a) ; // a = 5'bxxxxx ;
+		for (int i = 0; i < bricks_columns; i++)
+			for (int j = 0; j < bricks_rows; j++)
+			begin
+				// LEFT TOP CORNER OF BRICK
+				bricks_pos_x[i][j] = 2*border_width + i*brick_width + i*brick_break;
+				bricks_pos_y[i][j] = 2*border_width + j*brick_height + j*brick_break;
+				bricks_mask[i][j] = 1;
+			end
+	end
+
+	/*************************************************************************************************************/
+	/************************************************* GAME LOGIC ************************************************/
+	/*************************************************************************************************************/
+
+	/***********************/
+	/*** Display Borders ***/
+	/***********************/
+
+	always @(posedge VGA_clk)
+	begin
+		//if(start == 1)
+		//begin
+			border <= (((xCount >= 0) && (xCount <= border_width) 
+					|| 	(xCount >= window_width-border_width) 	&& (xCount <= window_width)) 
+					|| ((yCount >= 0) && (yCount <= border_width) 
+					||  (yCount >= window_height-border_width)	&& (yCount <= window_height)));
+		//end
+	end
+
+	/**********************/
+	/*** Display Rocket ***/
+	/**********************/
+
+	always @(posedge VGA_clk)
+	begin
+		//if(start == 1)
+		//begin
+			rocket <= (((xCount > rocket_x_pos) && (xCount < (rocket_x_pos + rocket_width)) && ((yCount >= rocket_y_pos) && (yCount <= (rocket_y_pos + rocket_height))) ));
+		//end
+	end
+	
+	/**********************/
+	/*** Display Bricks ***/
+	/**********************/
+
+	always @(posedge VGA_clk)
+	begin
+		//if(start == 1)
+		begin
+			for (int i = 0; i < bricks_columns; i++)
+				for (int j = 0; j < bricks_rows; j++)
+					bricks[i][j] <= (
+									(xCount >= bricks_pos_x[i][j]) && (xCount <= (bricks_pos_x[i][j]+brick_width)) 
+									&& 
+									(yCount >= bricks_pos_y[i][j]) && (yCount <= (bricks_pos_y[i][j]+brick_height))
+									) && (~bricks_mask[i][j]);
+		end
+	end
+
+	/********************/
+	/*** Display Ball ***/
+	/********************/
+	always @(posedge VGA_clk)
+	begin
+		//if(start == 1)
+		//begin
+			ball <= (((xCount - ball_pos_x)*(xCount - ball_pos_x) + (yCount - ball_pos_y)*(yCount - ball_pos_y)) < (ball_radius * ball_radius));
+		//end
+	end
+
+	/*********************/
+	/*** Start / Reset ***/
+	/*********************/
+	/*always @(posedge update)
+	begin
+		if(scan_code == enter)
+		begin
+			start = 1;
+		end		
+		else if(scan_code == bksp)
+		begin
+			reset = 1;
+		end		
+		else if(scan_code == key_p)
+		begin
+			pause = pause + 1;
+		end	
+	end*/
+	
+	/*******************/
+	/*** Move Rocket ***/
+	/*******************/
+	always @(posedge update)
+	begin
+		//if(/*reset == 0 && start == 1 && pause % 2 == 0*/)
+		//begin
+			if( ((rocket_x_pos + rocket_width) < rocket_x_max_pos) && ( ( rocket_x_pos ) > rocket_x_min_pos))
+			begin
+				if(scan_code == key_d)		// right
+					rocket_x_pos <= rocket_x_pos + 1;
+				else if(scan_code == key_a)	// left
+					rocket_x_pos <= rocket_x_pos - 1;
+			end
+			else if (rocket_x_pos + rocket_width == rocket_x_max_pos)
+			begin
+				if(scan_code == key_d)		// right
+					rocket_x_pos <= rocket_x_pos;
+				else if(scan_code == key_a)	// left
+					rocket_x_pos <= rocket_x_pos - 1;
+			end
+			else if (rocket_x_pos == rocket_x_min_pos)
+			begin
+				if(scan_code == key_d)		// right
+					rocket_x_pos <= rocket_x_pos +1;
+				else if(scan_code == key_a)	// left
+					rocket_x_pos <= rocket_x_pos;
+			end
+		//end
+		//else
+		//begin
+		//	rocket_x_pos = (window_width/2) - (rocket_width/2);					// 280
+		//	rocket_y_pos = window_height - (2*border_width + rocket_height);	// 450
+		//	reset = 0;
+		//end
+	end
+
+	/********************************************/
+	/*** Move Ball And Handle Ball Collisions ***/
+	/********************************************/
+	always @(posedge update)
+	begin
+		//if(/*reset == 0 && start == 1 && pause % 2 == 0*/)
+		//begin
+			if( ball_pos_x + ball_radius == window_width-border_width)
+			begin
+				ball_pos_x_direction = -1;
+			end
+			else if( ball_pos_x - ball_radius == border_width)
+			begin
+				ball_pos_x_direction = 1;
+			end
+			else if( ball_pos_y + ball_radius == window_height-border_width)
+			begin
+				ball_pos_y_direction = -1;
+			end
+			else if( ball_pos_y + ball_radius > window_height-border_width)
+			begin
+				lifes = lifes - 1;
+			end
+			else if( ball_pos_y - ball_radius == border_width)
+			begin
+				ball_pos_y_direction = 1;
+			end
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			else if( (ball_pos_y + ball_radius == rocket_y_pos) && (ball_pos_x >= rocket_x_pos) && (ball_pos_x <= rocket_x_pos + rocket_width))
+			begin	// Top Rocket Collision
+				ball_pos_y_direction = ball_pos_y_direction * (-1);		
+			end
+			else if( (ball_pos_y >= rocket_y_pos) && (ball_pos_y <= rocket_y_pos + rocket_height) && (ball_pos_x + ball_radius == rocket_x_pos))
+			begin	// Left Rocket Collision
+				ball_pos_x_direction = ball_pos_x_direction * (-1);		
+			end
+			else if( (ball_pos_y >= rocket_y_pos) && (ball_pos_y <= rocket_y_pos + rocket_height) && (ball_pos_x - ball_radius == rocket_x_pos + rocket_width))
+			begin	// Right Rocket Collision
+				ball_pos_x_direction = ball_pos_x_direction * (-1);		
+			end
+			else if(ball_pos_y - ball_radius >= rocket_y_pos + rocket_height)
+			begin
+				if(lifes > 0)
+				begin
+					lifes = lifes - 1;
+					if(points-100 >= 0)
+					begin
+						points = points - 100;
+					end
+					else
+					begin
+						points = 0;
+					end
+				end
+				/*else
+				begin
+					start = 0;
+				end*/
+			end
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			else
+			begin
+				for (int i = 0; i < bricks_columns; i++)
+					for (int j = 0; j < bricks_rows; j++)
+						if(~bricks_mask[i][j])
+						begin
+							if( (ball_pos_y + ball_radius == bricks_pos_y[i][j]) && (ball_pos_x + ball_radius >= bricks_pos_x[i][j]) && (ball_pos_x - ball_radius <= bricks_pos_x[i][j] + brick_width))
+							begin	// Top Brick Collision
+								ball_pos_y_direction = ball_pos_y_direction * (-1);	
+								points = points + 2;	
+								bricks_mask[i][j] = ~bricks_mask[i][j];
+							end
+							else if( (ball_pos_y - ball_radius == bricks_pos_y[i][j] + brick_height) && (ball_pos_x + ball_radius >= bricks_pos_x[i][j]) && (ball_pos_x - ball_radius<= bricks_pos_x[i][j] + brick_width))
+							begin	// Bottom Brick Collision
+								ball_pos_y_direction = ball_pos_x_direction * (-1);	
+								points = points + 2;	
+								bricks_mask[i][j] = ~bricks_mask[i][j];
+							end
+							else if( (ball_pos_y >= bricks_pos_y[i][j]) && (ball_pos_y <= bricks_pos_y[i][j] + brick_height) && (ball_pos_x + ball_radius == bricks_pos_x[i][j]))
+							begin	// Left Brick Collision
+								ball_pos_x_direction = ball_pos_x_direction * (-1);		
+								points = points + 2;
+								bricks_mask[i][j] = ~bricks_mask[i][j];
+							end
+							else if( (ball_pos_y >= bricks_pos_y[i][j]) && (ball_pos_y <= bricks_pos_y[i][j] + brick_height) && (ball_pos_x - ball_radius == bricks_pos_x[i][j] + brick_width))
+							begin	// Right Brick Collision
+								ball_pos_x_direction = ball_pos_x_direction * (-1);
+								points = points + 2;	
+								bricks_mask[i][j] = ~bricks_mask[i][j];	
+							end
+						end
+			end
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			ball_pos_x = ball_pos_x + ball_pos_x_direction;
+			ball_pos_y = ball_pos_y + ball_pos_y_direction;
+		//end
+		//else
+		//begin
+		//	ball_pos_x = window_width/2;	// 320
+		//	ball_pos_y = 450 - ball_radius;	// 443
+		//	ball_pos_x_direction = 1;
+		//	ball_pos_y_direction = 1;
+		//	reset = 0;
+		//end
+	end
+	
+	always@(posedge VGA_clk)
+	begin
+		VGA_R = {10{R}};
+		VGA_G = {10{G}};
+		VGA_B = {10{B}};
+	end 
+endmodule // aghnoid
+
